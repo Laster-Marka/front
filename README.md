@@ -1,4 +1,4 @@
-https://img.shields.io/powershellgallery/p/DNS.1.1.1.1
+![Powershell Gallery](https://img.shields.io/powershellgallery/p/DNS.1.1.1.1)
 
 # test
 This project is a test project!
