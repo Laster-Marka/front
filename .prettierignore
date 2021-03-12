@@ -1,0 +1,9 @@
+.idea
+.vscode
+/node_modules
+.cache
+dist
+coverage
+.build
+build
+web_modules
