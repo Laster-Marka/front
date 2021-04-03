@@ -6,7 +6,9 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "storybook": "start-storybook -p 6006 -s public",
+    "storybook:build": "build-storybook -s public"
   },
   "dependencies": {
     "@testing-library/jest-dom": "5.11.9",
@@ -16,6 +18,8 @@
     "@types/node": "12.20.4",
     "@types/react": "17.0.2",
     "@types/react-dom": "17.0.1",
+    "axios": "0.21.1",
+    "classnames": "2.2.6",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-scripts": "4.0.2",
@@ -47,6 +51,13 @@
     "@babel/plugin-proposal-decorators": "7.13.5",
     "@babel/preset-typescript": "7.13.0",
     "@craco/craco": "6.1.1",
+    "@storybook/addon-actions": "6.1.21",
+    "@storybook/addon-essentials": "6.1.21",
+    "@storybook/addon-links": "6.1.21",
+    "@storybook/node-logger": "6.1.21",
+    "@storybook/preset-create-react-app": "3.1.7",
+    "@storybook/react": "6.1.21",
+    "@types/classnames": "2.2.11",
     "babel-plugin-transform-typescript-metadata": "0.3.1",
     "prettier": "2.2.1",
     "ts-mockito": "2.6.1"

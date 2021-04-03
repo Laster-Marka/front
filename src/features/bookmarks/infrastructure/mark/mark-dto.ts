@@ -1,6 +1,7 @@
-import {Type} from "./type";
+import {Type} from "../../domain/type";
 
-export interface Mark {
+export interface MarkDto {
+  userId: number
   id: number
   folder: number
   title: string

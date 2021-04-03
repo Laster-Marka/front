@@ -1,0 +1,12 @@
+.card-container {
+  display: flex;
+  margin: var(--l);
+}
+.card-container-shape {
+  background: linear-gradient(90deg, grey 70%, white 30%);
+  float: left;
+  margin-right: var(--xl);
+  border-radius: var(--l);
+  border: var(--l);
+  border-color: #636366;
+}

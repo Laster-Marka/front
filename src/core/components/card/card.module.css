@@ -1,0 +1,30 @@
+/*.card {*/
+/*  box-shadow: var(--shadow);*/
+/*  border-radius: var(--radius);*/
+/*  padding: var(--m);*/
+/*  transition: 0.25s ease-in transform;*/
+/*}*/
+
+/*.card:hover {*/
+/*  transform: translateY(-3px);*/
+/*}*/
+.card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: 0.2s;
+}
+.card:not(:first-child) {
+  margin-left: -2rem;
+}
+.card:not(:last-child):hover,
+.card:not(:last-child):focus-within {
+  transform: translateY(-1rem) rotate(-5deg);
+}
+.card:not(:last-child):focus-within ~ .card {
+  transform: translateX(2rem);
+}
+.card:not(:last-child):hover ~ .card {
+  transform: translateX(2rem);
+}
