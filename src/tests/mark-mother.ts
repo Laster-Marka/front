@@ -10,7 +10,8 @@ export class MarkMother {
       type: 'Video',
       tags: ['cat', 'cute', 'no'],
       description: 'The cat says no, lol',
-      date: new Date("2019-01-17")
+      createdAt: new Date("2019-01-17"),
+      updatedAt: new Date("2019-01-30")
     }
   }
   static markdownVim(): Mark {
@@ -22,7 +23,8 @@ export class MarkMother {
       type: 'Markdown',
       tags: ['stackoverflow', 'vim'],
       description: ':q',
-      date: new Date("2019-01-18")
+      createdAt: new Date("2019-01-18"),
+      updatedAt: new Date("2019-01-20")
     }
   }
   static textYahoo(): Mark {
@@ -34,7 +36,8 @@ export class MarkMother {
       type: 'Text',
       tags: ['yahoo', 'philosophy', 'nietzsche'],
       description: 'Yahoo Respuestas saved my life, now I am a superhuman',
-      date: new Date("2019-01-16")
+      createdAt: new Date("2019-01-16"),
+      updatedAt: new Date("2019-01-20")
   }
   }
 }

@@ -1,9 +1,9 @@
 import {MarkRepository} from "../../domain/mark-repository";
 
-export class GetMarksUseCase {
+export class GetFoldersUseCase {
   constructor(private readonly markRepository: MarkRepository) {}
 
   async execute() {
-    return this.markRepository.findAll()
+    return this.markRepository.findFolders()
   }
 }

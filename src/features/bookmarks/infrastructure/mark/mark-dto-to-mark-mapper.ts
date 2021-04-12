@@ -11,7 +11,8 @@ export class MarkDtoToMarkMapper {
       type: todoDto.type,
       tags: todoDto.tags,
       description: todoDto.description,
-      date: todoDto.date
+      createdAt: todoDto.createdAt,
+      updatedAt: todoDto.updatedAt
     }
   }
 }

@@ -3,10 +3,19 @@
   margin: var(--l);
 }
 .card-container-shape {
+  display: flex;
   background: linear-gradient(90deg, grey 70%, white 30%);
   float: left;
   margin-right: var(--xl);
   border-radius: var(--l);
   border: var(--l);
   border-color: #636366;
+}
+.card-title {
+  flex: 3;
+}
+
+.card-button {
+  flex: 1;
+  text-align: center;
 }

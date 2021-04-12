@@ -9,5 +9,6 @@ export interface MarkDto {
   type: Type
   tags: string[]
   description: string
-  date: Date
+  createdAt: Date
+  updatedAt: Date
 }
