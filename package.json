@@ -5,12 +5,15 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test",
+    "test": "craco tyest",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "storybook": "start-storybook -p 6006 -s public",
     "storybook:build": "build-storybook -s public"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "1.2.36",
+    "@fortawesome/free-solid-svg-icons": "5.15.4",
+    "@fortawesome/react-fontawesome": "0.1.15",
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.5",
     "@testing-library/user-event": "12.7.1",
@@ -21,8 +24,12 @@
     "axios": "0.21.1",
     "classnames": "2.2.6",
     "react": "17.0.1",
+    "react-dnd": "^14.0.3",
+    "react-dnd-html5-backend": "^14.0.1",
     "react-dom": "17.0.1",
     "react-scripts": "4.0.2",
+    "react-select": "4.3.1",
+    "react-tag-input": "^6.7.3",
     "reflect-metadata": "0.1.13",
     "tsyringe": "4.4.0",
     "typescript": "4.1.5",
@@ -58,6 +65,8 @@
     "@storybook/preset-create-react-app": "3.1.7",
     "@storybook/react": "6.1.21",
     "@types/classnames": "2.2.11",
+    "@types/react-select": "^4.0.17",
+    "@types/react-tag-input": "^6.1.3",
     "babel-plugin-transform-typescript-metadata": "0.3.1",
     "prettier": "2.2.1",
     "ts-mockito": "2.6.1"

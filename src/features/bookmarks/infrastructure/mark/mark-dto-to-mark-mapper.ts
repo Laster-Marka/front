@@ -1,18 +1,25 @@
-import {Mark} from "../../domain/mark";
+import {Mark} from "../../domain/mark/mark";
 import {MarkDto} from "./mark-dto";
+import {TagDtoToTagMapper} from "../tag/tag-dto-to-tag-mapper";
+import {Tag} from "../../domain/tag/tag";
 
 export class MarkDtoToMarkMapper {
-  map(todoDto: MarkDto): Mark {
+  constructor(
+    private readonly tagDtoToTagMapper: TagDtoToTagMapper
+  ) {}
+  map(markDto: MarkDto): Mark {
+    const tags:Tag[] = markDto.tags.map((tag) => {return this.tagDtoToTagMapper.map(tag)})
     return {
-      id: todoDto.id,
-      folder: todoDto.folder,
-      title: todoDto.title,
-      link: todoDto.link,
-      type: todoDto.type,
-      tags: todoDto.tags,
-      description: todoDto.description,
-      createdAt: todoDto.createdAt,
-      updatedAt: todoDto.updatedAt
+      id: markDto._id,
+      title: markDto.title,
+      link: markDto.link,
+      type: markDto.type[0].name,
+      tags: tags,
+      description: markDto.description,
+      image: markDto.image,
+      markdown: markDto.markdown,
+      createdAt: markDto.createdAt,
+      updatedAt: markDto.updatedAt
     }
   }
 }

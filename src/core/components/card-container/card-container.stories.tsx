@@ -5,4 +5,4 @@ export default {
   component: CardContainer
 }
 
-export const base = () => <CardContainer cardContainerName={'New'} onButtonClicked={() => {}}>Click me</CardContainer>
+export const base = () => <CardContainer cardContainerName={'New'} showDeleteModal={() => {}} newMark={() => {}}>Click me</CardContainer>

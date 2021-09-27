@@ -1,13 +1,15 @@
+import {Tag} from "../tag/tag";
 import {Type} from "./type";
 
 export interface Mark {
-  id: number
-  folder: number
+  id: string
   title: string
   link: string
   type: Type
-  tags: string[]
+  tags: Tag[]
   description: string
+  image: string
+  markdown: string
   createdAt: Date
   updatedAt: Date
 }

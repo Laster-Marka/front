@@ -1,12 +1,20 @@
 import {FC, useState} from "react";
 import {Button} from "../../../../core/components/button/button";
 import {Modal} from "../../../../core/components/modal/modal";
-import {Mark} from "../../domain/mark";
-import {MarkRepository} from "../../domain/mark-repository";
+import {Mark} from "../../domain/mark/mark";
+import {MarkRepository} from "../../domain/mark/mark-repository";
+import {CreateMarkDto} from "../../infrastructure/mark/create-mark-dto";
+import Select from "react-select";
+import {Type, typeOptions} from "../../domain/mark/type";
+import {Tag as ReactTag, WithContext as ReactTags} from "react-tag-input"
+import styles from "../mark-create/mark-create.module.css";
+import {bind} from "../../../../utils/bind";
+
+const cx = bind(styles)
 
 interface Props {
   markRepository: MarkRepository
-  folderId: number
+  folderId: string
   isModalOpened: boolean
   onMarkCreated(mark: Mark): void
   onModalReset(): void
@@ -14,55 +22,45 @@ interface Props {
 
 export const CreateMark: FC<Props> = ({ markRepository , folderId, isModalOpened, onMarkCreated, onModalReset}) => {
 
-  const [titleText, setTitleText] = useState('')
-  const [linkText, setLinkText] = useState('')
-  const [descriptionText, setDescriptionText] = useState('')
-  const [tagText, setTagText] = useState('')
-  const [tags, setTags] = useState<string[]>([])
+  const [type, setType] = useState<Type>('Text')
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [link, setLink] = useState('')
+  const [tags, setTags] = useState<ReactTag[]>([])
 
-  async function createMark(folderId: number) {
-    const newMark: Mark = { id: Math.random() * 1000, folder: folderId, title: titleText, link: linkText, type: 'Text', tags: tags, description: descriptionText, createdAt: new Date(Date.now()), updatedAt: new Date(Date.now()) }
-    await markRepository.create(newMark)
+  async function createMark(folderId: string) {
+    const createMarkDto: CreateMarkDto = { title: title, link: link, type: type, tags: tags.map((tag)=> {return {name:tag.text}}), description: description, image: "", markdown: "" }
+    const newMark = await markRepository.create(createMarkDto, folderId)
     resetModal()
     onMarkCreated(newMark)
+  }
+
+  const handleDrag = (tag:ReactTag, currPos:number, newPos:number) => {
+    const newTags = [...tags].slice();
+
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+
+    setTags(newTags)
   }
 
   return (
     <Modal isOpened={isModalOpened} onExitModal={resetModal}>
       <Button theme={"secondary"} onClick={cleanModal}/>
-      <form>
-        <label>
-          Title
-          <input value={titleText} onChange={event => setTitleText(event.target.value)} />
-        </label>
-        <label>
-          Type
-          <select>
-            <option defaultValue='Text'>Text</option>
-            <option value='Image'>Image</option>
-            <option value='Video'>Video</option>
-            <option value='Markdown'>Markdown</option>
-          </select>
-        </label>
-        <label>
-          Link
-          <input value={linkText} onChange={event => setLinkText(event.target.value)} />
-        </label>
-        <label>
-          Description
-          <textarea value={descriptionText} onChange={event => setDescriptionText(event.target.value)}></textarea>
-        </label>
-        <label>
-          Add Tags
-          <input value={tagText} onChange={event => setTagText(event.target.value)} />
-          <Button theme={"secondary"} onClick={() => {setTags([...tags, tagText])}}/>
-        </label>
-        {tags.length ? tags.map(tag => (
-          <span>{tag}&nbsp</span>
-        )) : null}
-
-        <Button theme={"primary"} onClick={() => createMark(folderId)}/>
-      </form>
+      <Select isDisabled={false} isLoading={false} name={"markTypes"} onChange={event => {
+        const comboOption: {value: Type, label: string} | undefined = typeOptions.find(option => option.value === event?.value)
+        if(comboOption!==undefined){
+          setType(comboOption.value)
+        }
+      }} options={typeOptions} defaultValue={typeOptions.find(option => option.value === 'Text')}/>
+      <input value={title} onChange={event => setTitle(event.target.value)}/>
+      <input value={description} onChange={event => setDescription(event.target.value)}/>
+      <input value={link} onChange={event => setLink(event.target.value)}/>
+      <div className={cx('ReactTags')}>
+        <ReactTags tags={tags} allowUnique={true} handleAddition={(tag)=>{setTags([...tags,tag])}} allowDragDrop={true} handleDelete={(i)=>{// @ts-ignore
+          setTags(tags.filter(( tag, index) => index !== i))}} handleDrag={handleDrag}></ReactTags>
+      </div>
+      <Button theme={"primary"} onClick={() => createMark(folderId)}/>
     </Modal>
   )
 
@@ -72,10 +70,9 @@ export const CreateMark: FC<Props> = ({ markRepository , folderId, isModalOpened
   }
 
   function cleanModal(){
-    setTitleText("")
-    setLinkText("")
-    setDescriptionText("")
-    setTagText("")
+    setTitle("")
+    setLink("")
+    setDescription("")
     setTags([])
   }
 }

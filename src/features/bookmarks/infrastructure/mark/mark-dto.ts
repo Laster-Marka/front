@@ -1,14 +1,15 @@
-import {Type} from "../../domain/type";
+import {TypeObj} from "../../domain/mark/type";
+import {TagDto} from "../tag/tag-dto";
 
 export interface MarkDto {
-  userId: number
-  id: number
-  folder: number
+  _id: string
   title: string
   link: string
-  type: Type
-  tags: string[]
+  type: TypeObj[]
+  tags: TagDto[]
   description: string
+  image: string
+  markdown: string
   createdAt: Date
   updatedAt: Date
 }
