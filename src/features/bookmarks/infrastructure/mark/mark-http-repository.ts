@@ -1,7 +1,6 @@
 import {MarkRepository} from "../../domain/mark/mark-repository";
 import {Mark} from "../../domain/mark/mark";
 import {http} from "../../../../core/http/http";
-import {MarkDto} from "./mark-dto";
 import {MarkDtoToMarkMapper} from "./mark-dto-to-mark-mapper";
 import {Folder} from "../../domain/folder/folder";
 import {CreateMarkDto} from "./create-mark-dto";
@@ -9,7 +8,6 @@ import {MarkToEditMarkDtoMapper} from "./mark-to-edit-mark-dto";
 import {CreateFolderDto} from "../folder/create-folder-dto";
 import {FolderToEditFolderDtoMapper} from "../folder/folder-to-edit-folder-dto-mapper";
 import {EditFolderDto} from "../folder/edit-folder-dto";
-import {AxiosResponse} from "axios";
 //TODO: Promise response
 export class MarkHttpRepository implements MarkRepository {
   constructor(
