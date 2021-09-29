@@ -9,6 +9,7 @@ import {MarkToEditMarkDtoMapper} from "./mark-to-edit-mark-dto";
 import {CreateFolderDto} from "../folder/create-folder-dto";
 import {FolderToEditFolderDtoMapper} from "../folder/folder-to-edit-folder-dto-mapper";
 import {EditFolderDto} from "../folder/edit-folder-dto";
+import {AxiosResponse} from "axios";
 //TODO: Promise response
 export class MarkHttpRepository implements MarkRepository {
   constructor(
@@ -17,9 +18,8 @@ export class MarkHttpRepository implements MarkRepository {
     private readonly folderToEditFolderDtoMapper: FolderToEditFolderDtoMapper
   ) {}
 
-  async findAll(): Promise<Folder[]> {
-    await http.get<MarkDto[]>('/home')
-    return []
+  async findAll(): Promise<any> {
+    return await http.get('/home')
   }
 
   async create(createMarkDto: CreateMarkDto, idFolder: string): Promise<any> {
