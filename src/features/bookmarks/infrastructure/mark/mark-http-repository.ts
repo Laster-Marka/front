@@ -10,6 +10,8 @@ import {FolderToEditFolderDtoMapper} from "../folder/folder-to-edit-folder-dto-m
 import {EditFolderDto} from "../folder/edit-folder-dto";
 import {AxiosResponse} from "axios";
 import {FolderDtoToFolderMapper} from "../folder/folder-dto-to-folder-mapper"
+import {FoldersContent} from "../folder/folders-content";
+import {FolderDto} from "../folder/folder-dto";
 //TODO: Promise response
 export class MarkHttpRepository implements MarkRepository {
   constructor(
@@ -21,9 +23,9 @@ export class MarkHttpRepository implements MarkRepository {
 
   async findAll(): Promise<any> {
     const response: AxiosResponse = await http.get('/home', {baseURL: "https://laster-marka-back.herokuapp.com"})
-    const folder = this.folderDtoToFolderMapper.map(response.data.folders[0])
-    //const folders: Folder[] = foldersContent.folders.map((folder: FolderDto) => {return this.folderDtoToFolderMapper.map(folder)})
-    return [folder]
+    const foldersContent: FoldersContent = response.data
+    const folders: Folder[] = foldersContent.folders.map((folder: FolderDto) => {return this.folderDtoToFolderMapper.map(folder)})
+    return folders
   }
 
   async create(createMarkDto: CreateMarkDto, idFolder: string): Promise<any> {
