@@ -17,7 +17,7 @@ export class MarkHttpRepository implements MarkRepository {
   ) {}
 
   async findAll(): Promise<any> {
-    return await http.get('/home')
+    return await http.get('/home', {baseURL: "https://laster-marka-back.herokuapp.com"})
   }
 
   async create(createMarkDto: CreateMarkDto, idFolder: string): Promise<any> {
