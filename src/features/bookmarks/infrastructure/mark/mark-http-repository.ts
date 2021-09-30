@@ -19,7 +19,7 @@ export class MarkHttpRepository implements MarkRepository {
 
   async findAll(): Promise<any> {
     const response: AxiosResponse = await http.get('/home', {baseURL: "https://laster-marka-back.herokuapp.com"})
-    return response.data.folders
+    return response.data
   }
 
   async create(createMarkDto: CreateMarkDto, idFolder: string): Promise<any> {
