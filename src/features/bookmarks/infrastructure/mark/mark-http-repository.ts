@@ -22,7 +22,7 @@ export class MarkHttpRepository implements MarkRepository {
   ) {}
 
   async findAll(): Promise<any> {
-    const response: AxiosResponse = await http.get('/home', {baseURL: "https://laster-marka-back.herokuapp.com"})
+    const response: AxiosResponse = await http.get('/home')
     const foldersContent: FoldersContent = response.data
     const folders: Folder[] = foldersContent.folders.map((folder: FolderDto) => {return this.folderDtoToFolderMapper.map(folder)})
     return folders
