@@ -30,6 +30,9 @@ export class UserHttpRepository implements UserRepository {
 
   async get(): Promise<any> {
     const response = await http.get(`/user`)
+    if(response === undefined){
+      return null
+    }
     return response
   }
 
