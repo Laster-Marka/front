@@ -9,7 +9,7 @@ import {User} from "./features/bookmarks/domain/user/user";
 
 export const App: FC = () => {
 
-  const userRepository = UserRepositoryFactory.buildLocal()
+  const userRepository = UserRepositoryFactory.build()
   const [user, setUser] = useState<User>()
 
   useEffect(() => {
@@ -17,9 +17,8 @@ export const App: FC = () => {
   }, [])
 
   async function fetchUsers() {
-    const token = ""
     const getUsersUseCase = new GetUsersUseCase(userRepository)
-    setUser(await getUsersUseCase.execute(token))
+    setUser(await getUsersUseCase.execute())
   }
 
   return (

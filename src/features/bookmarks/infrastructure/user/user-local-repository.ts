@@ -76,18 +76,15 @@ export class UserLocalRepository implements UserRepository {
     return resultError
   }
 
-  async get(token: string): Promise<any> {
+  async get(): Promise<any> {
     let userString: string | null = null
-    if(token !== null){
-      userString = this.storage.getItem('active-user')
-    }
+    userString = this.storage.getItem('active-user')
     if (userString !== null) {
       let user: User = JSON.parse(userString)
       return user
     } else{
       return null
     }
-    return null
   }
 
   async edit(user: User): Promise<any> {
@@ -103,14 +100,20 @@ export class UserLocalRepository implements UserRepository {
     return resultError
   }
 
-  async editPassword(user: User, editPassword: EditPassword): Promise<any> {
+  async editPassword(editPassword: EditPassword): Promise<any> {
+    const usersString = this.storage.getItem('users')
     const userString = this.storage.getItem('active-user')
     let resultError: boolean = false
-    if (userString !== null) {
+    if (userString !== null && usersString !== null) {
       let dbUser: User = JSON.parse(userString)
-      if(editPassword.oldPassword === user.password && editPassword.newPassword === editPassword.newConfirmPassword){
+      let users: User[] = JSON.parse(usersString)
+      const findUserIndex = users.findIndex(i => i.email === dbUser.email)
+      const isUser = findUserIndex !== -1
+      if(isUser && editPassword.oldPassword === users[findUserIndex].password && editPassword.newPassword === editPassword.newConfirmPassword){
         dbUser.password = editPassword.newPassword
+        users[findUserIndex].password = editPassword.newPassword
         this.storage.setItem('active-user', JSON.stringify(dbUser))
+        this.storage.setItem('users', JSON.stringify(users))
       } else{
         resultError = true
       }

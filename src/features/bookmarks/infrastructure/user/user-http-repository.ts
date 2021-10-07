@@ -14,33 +14,33 @@ export class UserHttpRepository implements UserRepository {
   ) {}
 
   async signUp(user: UserRegister): Promise<any> {
-    const response = await http.post('/signup', {createUserDto: user})
+    const response = await http.post('/user/signup', {createUserDto: user})
     return response
   }
 
   async logIn(user: UserLogin): Promise<any> {
-    const response = await http.post('/signin', {getUserDto: user})
+    const response = await http.post('/user/login', {getUserDto: user})
     return response
   }
 
   async logOut(user: User): Promise<any> {
-    const response = await http.post('/signout', {getUserDto: this.userToUserDtoMapper.map(user)})
+    const response = await http.post('/user/logout', {getUserDto: this.userToUserDtoMapper.map(user)})
     return response
   }
 
-  async get(token: string): Promise<any> {
-    const response = await http.post(`/token`, {token: token})
+  async get(): Promise<any> {
+    const response = await http.post(`/user`)
     return response
   }
 
   async edit(user: User): Promise<any> {
-    const response = await http.put(`/edit/${user.name}`, {editMarkDto: this.userToUserDtoMapper.map(user)})
+    const response = await http.put(`/user`, {editMarkDto: this.userToUserDtoMapper.map(user)})
     this.userDtoToUserMapper.map(response.data)
     return []
   }
 
-  async editPassword(user: User, editPassword: EditPassword): Promise<any> {
-    const response = await http.put(`/edit/${user.name}`, {editPasswordDto: editPassword})
+  async editPassword(editPassword: EditPassword): Promise<any> {
+    const response = await http.put(`/user/password`, {editPasswordDto: editPassword})
     this.userDtoToUserMapper.map(response.data)
     return []
   }

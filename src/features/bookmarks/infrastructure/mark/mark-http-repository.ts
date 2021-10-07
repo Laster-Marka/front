@@ -12,7 +12,7 @@ import {AxiosResponse} from "axios";
 import {FolderDtoToFolderMapper} from "../folder/folder-dto-to-folder-mapper"
 import {FoldersContent} from "../folder/folders-content";
 import {FolderDto} from "../folder/folder-dto";
-//TODO: Promise response
+
 export class MarkHttpRepository implements MarkRepository {
   constructor(
     private readonly markDtoToMarkMapper: MarkDtoToMarkMapper,

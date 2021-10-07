@@ -25,7 +25,6 @@ export class MarkLocalRepository implements MarkRepository {
       return []
     } else {
       let foldersContent: FoldersContent = JSON.parse(foldersString)
-      //TODO:folderMapper
       const folders: Folder[] = foldersContent.folders.map((folder) => {return this.folderDtoToFolderMapper.map(folder)})
       return folders
     }
