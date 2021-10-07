@@ -8,7 +8,12 @@ export class MarkDtoToMarkMapper {
     private readonly tagDtoToTagMapper: TagDtoToTagMapper
   ) {}
   map(markDto: MarkDto): Mark {
-    const tags:Tag[] = markDto.tags.map((tag) => {return this.tagDtoToTagMapper.map(tag)})
+    let tags: Tag[] = []
+    if(markDto.tags.length !== 0) {
+      tags = markDto.tags.map((tag) => {
+        return this.tagDtoToTagMapper.map(tag)
+      })
+    }
     return {
       id: markDto._id,
       title: markDto.title,

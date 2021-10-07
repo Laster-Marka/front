@@ -8,7 +8,12 @@ export class FolderDtoToFolderMapper {
     private readonly markDtoToMarkMapper: MarkDtoToMarkMapper
   ) {}
   map(folderDto: FolderDto): Folder {
-    const marks:Mark[] = folderDto.marks.map((mark) => {return this.markDtoToMarkMapper.map(mark)})
+    let marks: Mark[] = []
+    if(folderDto.marks.length !== 0) {
+      marks = folderDto.marks.map((mark) => {
+        return this.markDtoToMarkMapper.map(mark)
+      })
+    }
     return {
       id: folderDto._id,
       name: folderDto.name,

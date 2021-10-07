@@ -24,8 +24,13 @@ export class MarkHttpRepository implements MarkRepository {
   async findAll(): Promise<any> {
     const response: AxiosResponse = await http.get('/home')
     const foldersContent: FoldersContent = response.data
-    const folders: Folder[] = foldersContent.folders.map((folder: FolderDto) => {return this.folderDtoToFolderMapper.map(folder)})
-    return folders
+    if(foldersContent.folders.length !== 0){
+      const folders: Folder[] = foldersContent.folders.map((folder: FolderDto) => {return this.folderDtoToFolderMapper.map(folder)})
+      return folders
+    }
+    else {
+      return foldersContent.folders
+    }
   }
 
   async create(createMarkDto: CreateMarkDto, idFolder: string): Promise<any> {
