@@ -29,7 +29,7 @@ export class UserHttpRepository implements UserRepository {
   }
 
   async get(): Promise<any> {
-    const response = await http.post(`/user`)
+    const response = await http.get(`/user`)
     return response
   }
 
