@@ -15,17 +15,17 @@ export class UserHttpRepository implements UserRepository {
 
   async signUp(user: UserRegister): Promise<any> {
     const response = await http.post('/user/signup', {createUserDto: user})
-    return response
+    return response.data
   }
 
   async logIn(user: UserLogin): Promise<any> {
     const response = await http.post('/user/login', {getUserDto: user})
-    return response
+    return response.data
   }
 
   async logOut(user: User): Promise<any> {
     const response = await http.post('/user/logout', {getUserDto: this.userToUserDtoMapper.map(user)})
-    return response
+    return response.data
   }
 
   async get(): Promise<any> {
@@ -33,7 +33,7 @@ export class UserHttpRepository implements UserRepository {
     if(response === undefined){
       return null
     }
-    return response
+    return response.data
   }
 
   async edit(user: User): Promise<any> {
