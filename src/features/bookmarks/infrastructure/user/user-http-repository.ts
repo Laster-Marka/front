@@ -6,7 +6,6 @@ import {UserDtoToUserMapper} from "./user-dto-to-user-mapper";
 import {UserToUserDtoMapper} from "./user-to-user-dto-mapper";
 import {UserLogin} from "../../domain/user/user-login";
 import {UserRegister} from "../../domain/user/user-register";
-import Cookies from "js-cookie";
 
 export class UserHttpRepository implements UserRepository {
   constructor(
@@ -21,7 +20,7 @@ export class UserHttpRepository implements UserRepository {
 
   async logIn(user: UserLogin): Promise<any> {
     const response = await http.post('/user/login', {getUserDto: user})
-    return response
+    return response.data
   }
 
   async logOut(user: User): Promise<any> {
@@ -30,8 +29,7 @@ export class UserHttpRepository implements UserRepository {
   }
 
   async get(): Promise<any> {
-    const kokie = Cookies.get('jwt')
-    const response = await http.get(`/user`, {data: {cookie: kokie}})
+    const response = await http.get(`/user`, {withCredentials: true})
     if(response === undefined){
       return null
     }

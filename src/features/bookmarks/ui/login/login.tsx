@@ -31,8 +31,8 @@ export const Login: FC<Props> = ({userRepository, onUserAction}) => {
     setLoginError("")
     e.preventDefault()
     const user: UserLogin = {email: loginEmail, password: loginPassword}
-    const result = await userRepository.logIn(user)
-    console.log(result)
+    const cookie = await userRepository.logIn(user)
+    console.log(cookie)
     onUserAction()
   }
   async function registerSubmitHandler(e:ChangeEvent<HTMLFormElement>) {
