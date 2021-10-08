@@ -30,7 +30,8 @@ export class UserHttpRepository implements UserRepository {
   }
 
   async get(): Promise<any> {
-    const response = await http.get(`/user`, {data: {cookie: Cookies.get('jwt')}})
+    const kokie = Cookies.get('jwt')
+    const response = await http.get(`/user`, {data: {cookie: kokie}})
     if(response === undefined){
       return null
     }

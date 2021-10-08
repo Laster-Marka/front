@@ -12,6 +12,7 @@ import {Modal} from "../../../../core/components/modal/modal";
 import {bind} from "../../../../utils/bind";
 import styles from './marks.module.css'
 import {User} from "../../domain/user/user";
+import Cookies from "js-cookie";
 
 const cx = bind(styles)
 
@@ -35,6 +36,8 @@ export const Marks: FC<Props> = () => {
   }, [])
 
   async function fetchMarks() {
+    const kokie = Cookies.get('jwt')
+    console.log(kokie)
     const getFoldersUseCase = new GetFoldersUseCase(markRepository)
     const allFolders = await getFoldersUseCase.execute()
     // const getMarksUseCase = new GetMarksUseCase(markRepository)
