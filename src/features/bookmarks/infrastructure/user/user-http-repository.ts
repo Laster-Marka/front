@@ -33,6 +33,7 @@ export class UserHttpRepository implements UserRepository {
     if(response === undefined){
       return null
     }
+
     return response.data
   }
 
