@@ -10,7 +10,6 @@ import {CreateFolder} from "../folder-create/folder-create";
 import {Button} from "../../../../core/components/button/button";
 import {Modal} from "../../../../core/components/modal/modal";
 import {bind} from "../../../../utils/bind";
-
 import styles from './marks.module.css'
 import {User} from "../../domain/user/user";
 
