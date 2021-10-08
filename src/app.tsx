@@ -6,7 +6,6 @@ import {Login} from "./features/bookmarks/ui/login/login";
 import {UserRepositoryFactory} from "./features/bookmarks/infrastructure/user/user-repository-factory";
 import {GetUsersUseCase} from "./features/bookmarks/application/user/get-users-use-case";
 import {User} from "./features/bookmarks/domain/user/user";
-import Cookies from "js-cookie";
 
 export const App: FC = () => {
 
@@ -18,8 +17,6 @@ export const App: FC = () => {
   }, [])
 
   async function fetchUsers() {
-    const kokie = Cookies.get('jwt')
-    console.log(kokie)
     const getUsersUseCase = new GetUsersUseCase(userRepository)
     setUser(await getUsersUseCase.execute())
   }
