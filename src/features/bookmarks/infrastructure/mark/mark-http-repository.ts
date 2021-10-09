@@ -51,7 +51,9 @@ export class MarkHttpRepository implements MarkRepository {
   async createFolder(createFolderDto: CreateFolderDto): Promise<any> {
     //TODO
     createFolderDto.color = "60cb9f4748aa37109ef88e7f"
-    await http.post('/folder', {createFolderDto: createFolderDto})
+    const response = await http.post('/folder', {createFolderDto: createFolderDto})
+    const folder = this.folderDtoToFolderMapper.map(response.data)
+    return folder
   }
 
   async editFolder(folder: Folder): Promise<any> {

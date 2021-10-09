@@ -9,7 +9,7 @@ export class FolderDtoToFolderMapper {
   ) {}
   map(folderDto: FolderDto): Folder {
     let marks: Mark[] = []
-    if(folderDto.marks.length !== 0) {
+    if(folderDto.marks !== undefined && folderDto.marks.length !== 0) {
       marks = folderDto.marks.map((mark) => {
         return this.markDtoToMarkMapper.map(mark)
       })

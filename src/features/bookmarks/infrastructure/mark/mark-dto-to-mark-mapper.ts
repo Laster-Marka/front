@@ -9,7 +9,8 @@ export class MarkDtoToMarkMapper {
   ) {}
   map(markDto: MarkDto): Mark {
     let tags: Tag[] = []
-    if(markDto.tags.length !== 0) {
+
+    if(markDto.tags !== undefined && markDto.tags.length !== 0) {
       tags = markDto.tags.map((tag) => {
         return this.tagDtoToTagMapper.map(tag)
       })
