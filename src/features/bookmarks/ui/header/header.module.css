@@ -1,21 +1,30 @@
 .navbar {
+  flex: 1;
   padding: var(--m);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   box-shadow: var(--shadow);
 }
 
 .navbar__right {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   padding: 0 var(--m);
 }
 
+.navbar__left {
+  align-items: center;
+  padding: var(--s) var(--s);
+  width: var( --xl);
+  height: var( --xl);
+}
+
 .navbar__logo {
-  padding-right: var(--m);
-  width: var(--xl);
-  height: var(--xl);
+  width: 100%;
+  height: 100%;
+  border-radius: var(--m);
 }
 
 .navbar__search {
@@ -25,6 +34,13 @@
   padding: var(--s) var(--l);
   margin: 0 var(--l);
 }
-.navbar__login {
-  padding: var(--s) var(--l);
+
+.title {
+  color: var(--on-primary-color);
+}
+
+@media (max-width: 720px) {
+  .title {
+    font-size: 2rem;
+  }
 }

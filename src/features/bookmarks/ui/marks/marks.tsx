@@ -12,6 +12,8 @@ import {Modal} from "../../../../core/components/modal/modal";
 import {bind} from "../../../../utils/bind";
 import styles from './marks.module.css'
 import {User} from "../../domain/user/user";
+import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const cx = bind(styles)
 
@@ -22,7 +24,7 @@ interface Props {
 
 export const Marks: FC<Props> = () => {
 
-  const markRepository = MarkRepositoryFactory.build()
+  const markRepository = MarkRepositoryFactory.buildLocal()
   // const [marks, setMarks] = useState<MarkModel[]>([])
   const [folders, setFolders] = useState<Folder[]>([])
   const [currentFolder, setCurrentFolder] = useState("")
@@ -79,19 +81,22 @@ export const Marks: FC<Props> = () => {
                 setIsMarkModalOpen(true)
                 setCurrentFolder(folder.id)
               }} >
+                <div className={cx('card-list')}>
                 {folder.marks.length !== 0 ? (
                   folder.marks.map(mark => (
                     <Mark key={mark.id} folderId={folder.id} onClick={() => {}} mark={mark} markRepository={markRepository} onMarkEditOrDelete={fetchMarks}>{mark.title}</Mark>
-                  ))) : (<span>Empty Folder</span>)
+                  ))) : null
                 }
+                </div>
               </CardContainer>
             </>
-            ))) : (<span>No Folders</span>)
+            ))) : null
         }
         <CreateMark markRepository={markRepository} folderId={currentFolder} isModalOpened={isMarkModalOpen} onMarkCreated={(newMark) => onMarkCreated(newMark, folders, currentFolder)} onModalReset={() => setIsMarkModalOpen(false)}></CreateMark>
         <Modal isOpened={isDeleteFolderModalOpen} onExitModal={() => {setIsDeleteFolderModalOpen(false); setDeleteFolderID("")}}>
-          <div className="alert alert-danger">The folder will be deleted, including all bookmarks in the folder</div>
-          <Button onClick={()=>deleteFolder(deleteFolderID)}/>
+          <FontAwesomeIcon icon={faExclamationTriangle} className={cx('exclamation-triangle')}/>
+          <div className={cx("folder-delete-modal")}>The folder will be deleted, including all bookmarks in the folder!</div>
+          <Button theme={'primary'} onClick={()=>deleteFolder(deleteFolderID)}>Delete</Button>
         </Modal>
       </div>
     </main>

@@ -22,11 +22,14 @@ export const Header: FC<Props> = ({user, userRepository, onUserAction}) => {
 
   return (
     <header className={cx('navbar')}>
-      <img src={"./logo.png"} className={cx('navbar__logo')}></img>
+      <nav className={cx('navbar__left')}>
+        <img src={"./logo_v2.PNG"} className={cx('navbar__logo')}></img>
+      </nav>
       {/*//TODO: Future functionality <input type="search" placeholder="Search" className={cx('navbar__search')}/>*/}
+      <h2 className={cx('title')}>LASTER-MARKA</h2>
       <nav className={cx('navbar__right')}>
         {/*//TODO: Future functionality <Button className={cx('primary')}>Config</Button>*/}
-        <Button className={cx('primary')} onClick={() => logOut(user)}>Logout</Button>
+        <Button theme={'primary'} onClick={() => logOut(user)}>Logout</Button>
       </nav>
     </header>
   )

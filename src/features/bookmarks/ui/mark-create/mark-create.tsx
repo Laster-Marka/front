@@ -46,21 +46,35 @@ export const CreateMark: FC<Props> = ({ markRepository , folderId, isModalOpened
 
   return (
     <Modal isOpened={isModalOpened} onExitModal={resetModal}>
-      <Button theme={"secondary"} onClick={cleanModal}/>
-      <Select isDisabled={false} isLoading={false} name={"markTypes"} onChange={event => {
-        const comboOption: {value: Type, label: string} | undefined = typeOptions.find(option => option.value === event?.value)
-        if(comboOption!==undefined){
-          setType(comboOption.value)
-        }
-      }} options={typeOptions} defaultValue={typeOptions.find(option => option.value === 'Text')}/>
-      <input value={title} onChange={event => setTitle(event.target.value)}/>
-      <input value={description} onChange={event => setDescription(event.target.value)}/>
-      <input value={link} onChange={event => setLink(event.target.value)}/>
-      <div className={cx('ReactTags')}>
-        <ReactTags tags={tags} allowUnique={true} handleAddition={(tag)=>{setTags([...tags,tag])}} allowDragDrop={true} handleDelete={(i)=>{// @ts-ignore
-          setTags(tags.filter(( tag, index) => index !== i))}} handleDrag={handleDrag}></ReactTags>
+      <div className={cx('mark-modal')}>
+        <div className={cx('mark-modal-content')}>
+          <Select className={cx('mark-modal-select')} isDisabled={false} isLoading={false} name={"markTypes"} onChange={event => {
+            const comboOption: {value: Type, label: string} | undefined = typeOptions.find(option => option.value === event?.value)
+            if(comboOption!==undefined){
+              setType(comboOption.value)
+            }
+          }} options={typeOptions} defaultValue={typeOptions.find(option => option.value === 'Text')}/>
+          <div className={cx('mark-modal-form-div')}>
+            <label>Title</label>
+            <input value={title} onChange={event => setTitle(event.target.value)}/>
+          </div>
+          <div className={cx('mark-modal-form-div')}>
+            <label>Description</label>
+            <input value={description} onChange={event => setDescription(event.target.value)}/>
+          </div>
+          <div className={cx('mark-modal-form-div')}>
+            <label>Link</label>
+            <input value={link} onChange={event => setLink(event.target.value)}/>
+          </div>
+          <div className={cx('ReactTags')}>
+            <ReactTags tags={tags} allowUnique={true} handleAddition={(tag)=>{setTags([...tags,tag])}} allowDragDrop={true} handleDelete={(i)=>{// @ts-ignore
+              setTags(tags.filter(( tag, index) => index !== i))}} handleDrag={handleDrag}></ReactTags>
+          </div>
+        </div>
+        <div className={cx('mark-modal-create-button')}>
+          <Button theme={"primary"} onClick={() => createMark(folderId)}>Create</Button>
+        </div>
       </div>
-      <Button theme={"primary"} onClick={() => createMark(folderId)}/>
     </Modal>
   )
 

@@ -4,6 +4,10 @@ import {MarkRepository} from "../../domain/mark/mark-repository";
 import {FC, useState} from "react";
 import {Folder} from "../../domain/folder/folder";
 import {CreateFolderDto} from "../../infrastructure/folder/create-folder-dto";
+import {bind} from "../../../../utils/bind";
+import styles from './folder-create.module.css'
+
+const cx = bind(styles)
 
 interface Props {
   markRepository: MarkRepository
@@ -24,14 +28,13 @@ export const CreateFolder: FC<Props> = ({ markRepository, onFolderCreated}) => {
 
 return (
   <>
-    <Button theme={"secondary"} onClick={() => setIsModalOpened(true)}>Create Folder</Button>
+    <Button className={cx("folder-create-button")} theme={"primary"} onClick={() => setIsModalOpened(true)}>New Folder</Button>
     <Modal isOpened={isModalOpened} onExitModal={resetModal}>
-      <Button theme={"secondary"} onClick={cleanModal}/>
-      <label>
-        Title
+      <div className={cx("folder-modal-form-div")} >
+        <label>Title</label>
         <input value={titleText} onChange={event => setTitleText(event.target.value)} />
-      </label>
-      <Button theme={"primary"} onClick={() => createFolder()}/>
+      </div>
+      <Button theme={"primary"} onClick={() => createFolder()}>Create</Button>
     </Modal>
   </>
 )

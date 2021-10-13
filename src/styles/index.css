@@ -6,7 +6,7 @@ body {
 body {
   font-family: var(--body-font);
   font-size: var(--body-size);
-  background-color: #173e58;
+  background-color: var(--background-primary-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

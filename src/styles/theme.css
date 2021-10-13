@@ -1,10 +1,17 @@
 :root {
-  /* Palette */
-  --primary-color: hsl(226, 100%, 50%);
+  /* Palette   #88BDBC  #254E58 #112D32  #4F4A41   #6E6658*/
+  --background-primary-color: #254E58;
+  --primary-color: #4F4A41;
   --on-primary-color: white;
+  --main-background-primary-color: #88BDBC;
+  --card-primary-color: #6E6658;
+  /*--card-primary-color: #74a2a1;#805A40 #928877*/
+  --card-button-primary-color: #9b998d;
 
+  --background-secondary-color: #254E58;
   --secondary-color: rebeccapurple;
   --on-secondary-color: white;
+  --main-background-secondary-color: #254E58;
 
   --gray-color: hsl(0, 0%, 90%);
   --gray-color-900: hsl(0, 0%, 50%);

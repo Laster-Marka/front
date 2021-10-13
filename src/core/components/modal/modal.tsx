@@ -38,14 +38,15 @@ export const Modal: FC<Props> = ({ children, isOpened, onExitModal }) => {
 
   return(
     isOpened ? (
-      <div className={cx('background')} onClick={closeModal} ref={modalRef}>
+      <>
+        <div className={cx('background')} onClick={closeModal} ref={modalRef}></div>
         <div className={cx('modal')}>
           <span role="button" className={cx('close')} aria-label="close" onClick={close}>
             x
           </span>
           <div className={cx('modal-content')}>{children}</div>
         </div>
-      </div>
+      </>
     ) : null
   )
 }

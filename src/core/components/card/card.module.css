@@ -1,19 +1,14 @@
-/*.card {*/
-/*  box-shadow: var(--shadow);*/
-/*  border-radius: var(--radius);*/
-/*  padding: var(--m);*/
-/*  transition: 0.25s ease-in transform;*/
-/*}*/
-
-/*.card:hover {*/
-/*  transform: translateY(-3px);*/
-/*}*/
 .card {
-  background: white;
+  background: var(--card-primary-color);
+  max-height: 10rem;
+  min-height: 9rem;
+  min-width: 7rem;
+  max-width: 10rem;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: var(--shadow);
   transition: 0.2s;
+  color: var(--on-primary-color);
 }
 .card:not(:first-child) {
   margin-left: -2rem;

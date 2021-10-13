@@ -7,8 +7,10 @@ import {MarkRepository} from "../../domain/mark/mark-repository";
 import Select from "react-select";
 import {Type, typeOptions} from "../../domain/mark/type";
 import {Tag as ReactTag, WithContext as ReactTags} from 'react-tag-input';
-import styles from "../../../../core/components/tags/tags.module.css";
+import styles from "../../ui/mark/mark.module.css";
 import {bind} from "../../../../utils/bind";
+import {faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const cx = bind(styles)
 
@@ -80,46 +82,57 @@ export const Mark: FC<Props> = ({ onClick, mark , markRepository, folderId, onMa
     setIsMarkEditable(true)
   }
 
-  let linkElement:JSX.Element=<div><a href={link} target={"_blank"}>{link}</a><Button onClick={()=>{setIsLinkEditable(true); setIsMarkEditable(true)}}/></div>
-  if(isLinkEditable) {linkElement=<input value={link} onChange={event => setLink(event.target.value)}/>}
+  let linkElement:JSX.Element=<div className={cx('mark-modal-form-a')}><a href={link} target={"_blank"}>{link}</a><FontAwesomeIcon icon={faEdit} className={cx('edit')} onClick={()=>{setIsLinkEditable(true); setIsMarkEditable(true)}}/></div>
+  if(isLinkEditable) {linkElement=<div className={cx('mark-modal-form-div')}><input className={cx('mark-modal-form-a-input')} value={link} onChange={event => setLink(event.target.value)}/></div>}
+  const isOneTag = mark.tags.length !== 0
 
   return (
     <>
     <Card onClick={() => setIsOpen(true)}>
-      <span>{mark.type}</span>
-      <h4>{mark.title}</h4>
-      <p>{mark.description}</p>
-
-      <div onClick={onClick}>
-        <span></span>
+      <div className={cx('card-main')} onClick={onClick}>
+        <div className={cx('card-title')}>
+          <span>{mark.type}</span>
+          <h4>{mark.title}</h4>
+        </div>
+        <div className={cx('card-tags')}>
+          {isOneTag ? mark.tags.map(tag => (
+            <span>{tag.name}</span>
+          )) : null}
+        </div>
       </div>
     </Card>
   <Modal isOpened={isOpen} onExitModal={() => setIsOpen(false)}>
-    <Button onClick={deleteMark}/>
-    <Select isDisabled={false} isLoading={false} name={"markTypes"} onChange={event => {
-        const comboOption: {value: Type, label: string} | undefined = typeOptions.find(option => option.value === event?.value)
-        if(comboOption!==undefined){
-          setType(comboOption.value)
-          setIsMarkEditable(true)
-        }
-      }} options={typeOptions} defaultValue={typeOptions.find(option => option.value === mark.type)}/>
-    <div onClick={() => {setIsTitleDisable( false); setIsMarkEditable( true)}}>
-      <input value={title} onChange={event => setTitle(event.target.value)} disabled={isTitleDisable}/>
+    <div className={cx('mark-modal')}>
+      <FontAwesomeIcon icon={faTrash} className={cx('trash')} onClick={deleteMark} />
+      <div className={cx('mark-modal-content')}>
+      <Select className={cx('mark-modal-select')} isDisabled={false} isLoading={false} name={"markTypes"} onChange={event => {
+          const comboOption: {value: Type, label: string} | undefined = typeOptions.find(option => option.value === event?.value)
+          if(comboOption!==undefined){
+            setType(comboOption.value)
+            setIsMarkEditable(true)
+          }
+        }} options={typeOptions} defaultValue={typeOptions.find(option => option.value === mark.type)}/>
+      <div className={cx('mark-modal-form-div')} onClick={() => {setIsTitleDisable( false); setIsMarkEditable( true)}}>
+        <label>Title</label>
+        <input value={title} onChange={event => setTitle(event.target.value)} disabled={isTitleDisable}/>
+      </div>
+      <div className={cx('mark-modal-form-div')} onClick={() => {setIsDescriptionDisable( false); setIsMarkEditable( true)}}>
+        <label>Description</label>
+        <input value={description} onChange={event => setDescription(event.target.value)} disabled={isDescriptionDisable}/>
+      </div>
+      {linkElement}
+      <div className={cx('ReactTags')}>
+        <ReactTags tags={tags} allowUnique={true} handleAddition={(tag)=>{setTags([...tags,tag]); setIsMarkEditable(true)}} allowDragDrop={true} handleDelete={(i)=>{// @ts-ignore
+          setTags(tags.filter(( tag, index) => index !== i)); setIsMarkEditable(true)}} handleDrag={handleDrag}></ReactTags>
+      </div>
+      {isMarkEditable?
+        <div className={cx('mark-modal-edit-buttons')}>
+          <Button className={cx('mark-modal-edit-button')} theme={"primary"} onClick={saveMark}>Save</Button>
+          <Button className={cx('mark-modal-edit-button')} theme={"primary"} onClick={cancelSaveMark}>Cancel</Button>
+        </div>:null
+      }
+      </div>
     </div>
-    <div onClick={() => {setIsDescriptionDisable( false); setIsMarkEditable( true)}}>
-      <input value={description} onChange={event => setDescription(event.target.value)} disabled={isDescriptionDisable}/>
-    </div>
-    {linkElement}
-    <div className={cx('ReactTags')}>
-      <ReactTags tags={tags} allowUnique={true} handleAddition={(tag)=>{setTags([...tags,tag]); setIsMarkEditable(true)}} allowDragDrop={true} handleDelete={(i)=>{// @ts-ignore
-        setTags(tags.filter(( tag, index) => index !== i)); setIsMarkEditable(true)}} handleDrag={handleDrag}></ReactTags>
-    </div>
-    {isMarkEditable?
-      <div>
-        <Button theme={"primary"} onClick={saveMark}>Save</Button>
-        <Button theme={"primary"} onClick={cancelSaveMark}>Cancel</Button>
-      </div>:null
-    }
   </Modal>
   </>
   )

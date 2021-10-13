@@ -41,54 +41,60 @@ export const Login: FC<Props> = ({userRepository, onUserAction}) => {
     const user: UserRegister = {email: registerEmail, name: registerName, password: registerPassword, confirmPassword: registerConfirmPassword}
     const result = await userRepository.signUp(user)
     console.log(result)
+    setIsRegisterModalOpen(false)
     onUserAction()
   }
 
   return (
     <>
-    <form onSubmit={loginSubmitHandler}>
-      <div className={cx("form-inner")}>
-        <h2>Login</h2>
-        {(loginError !== "") ? (<div className={"form-error"}>{loginError}</div>) : null}
-        <div className="form-group">
-          <label>Email</label>
-          <input type={"email"} required={true} value={loginEmail} onChange={event => setLoginEmail(event.target.value)} />
-        </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input type={"password"} required={true} value={loginPassword} onChange={event => setLoginPassword(event.target.value)}/>
-        </div>
-        <div>
-          <input type={"submit"} className={cx("input-submit")} value={"LOGIN"}/>
-          <Button theme={"primary"} onClick={()=>setIsRegisterModalOpen(true)}>Register</Button>
-        </div>
+      <div className={cx("login-container")}>
+        <form onSubmit={loginSubmitHandler}>
+          <div className={cx("form-inner")}>
+            <h2 className={cx('title')}>LASTER-MARKA</h2>
+            {(loginError !== "") ? (<div className={"form-error"}>{loginError}</div>) : null}
+            <div className={cx('form-group')}>
+              <label>Email</label>
+              <input type={"email"} required={true} value={loginEmail} onChange={event => setLoginEmail(event.target.value)} />
+            </div>
+            <div className={cx('form-group', 'pass-margin')}>
+              <label>Password</label>
+              <input type={"password"} required={true} value={loginPassword} onChange={event => setLoginPassword(event.target.value)}/>
+            </div>
+            <div className={cx('login-buttons')}>
+              <input type={"submit"} className={cx("input-submit")} value={"Login"}/>
+              <Button theme={"primary"} onClick={()=>setIsRegisterModalOpen(true)}>Register</Button>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
-    <Modal isOpened={isRegisterModalOpen} onExitModal={() => setIsRegisterModalOpen(false)}>
-      <form onSubmit={registerSubmitHandler}>
-        <h2>Register</h2>
-        {(registerError !== "") ? (<div className={"form-error"}>{registerError}</div>) : null}
-        <div className="form-group">
-          <label>Email</label>
-          <input type={"email"} required={true} value={registerEmail} onChange={event => setRegisterEmail(event.target.value)} />
+      <Modal isOpened={isRegisterModalOpen} onExitModal={() => setIsRegisterModalOpen(false)}>
+        <div className={cx('register-modal')}>
+          <div className={cx('register-modal-content')}>
+            <form onSubmit={registerSubmitHandler}>
+              {(registerError !== "") ? (<div  className={cx('form-error')}>{registerError}</div>) : null}
+              <div className={cx('form-group', 'register-modal-form-div')}>
+                <label>Email</label>
+                <input type={"email"} required={true} value={registerEmail} onChange={event => setRegisterEmail(event.target.value)} />
+              </div>
+              <div className={cx('form-group', 'register-modal-form-div')}>
+                <label>Name</label>
+                <input type={"text"} required={true} value={registerName} onChange={event => setRegisterName(event.target.value)} />
+              </div>
+              <div className={cx('form-group', 'register-modal-form-div')}>
+                <label>Password</label>
+                <input type={"password"} required={true} value={registerPassword} onChange={event => setRegisterPassword(event.target.value)}/>
+              </div>
+              <div className={cx('form-group', 'register-modal-form-div')}>
+                <label>Confirm Password</label>
+                <input type={"password"} required={true} value={registerConfirmPassword} onChange={event => setRegisterConfirmPassword(event.target.value)}/>
+              </div>
+              <div className={cx('register-modal-button')}>
+                <input type={"submit"} className={cx("input-submit")} value={"Register"}/>
+              </div>
+            </form>
+          </div>
         </div>
-        <div className="form-group">
-          <label>Name</label>
-          <input type={"text"} required={true} value={registerName} onChange={event => setRegisterName(event.target.value)} />
-        </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input type={"password"} required={true} value={registerPassword} onChange={event => setRegisterPassword(event.target.value)}/>
-        </div>
-        <div className="form-group">
-          <label>Confirm Password</label>
-          <input type={"password"} required={true} value={registerConfirmPassword} onChange={event => setRegisterConfirmPassword(event.target.value)}/>
-        </div>
-        <div>
-          <input type={"submit"} className={cx("input-submit")} value={"Register"}/>
-        </div>
-      </form>
-    </Modal>
-  </>
+      </Modal>
+    </>
   )
 }

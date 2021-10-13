@@ -9,7 +9,7 @@ import {User} from "./features/bookmarks/domain/user/user";
 
 export const App: FC = () => {
 
-  const userRepository = UserRepositoryFactory.build()
+  const userRepository = UserRepositoryFactory.buildLocal()
   const [user, setUser] = useState<User>()
 
   useEffect(() => {
@@ -32,5 +32,4 @@ export const App: FC = () => {
       }
     </>
     )
-
 }

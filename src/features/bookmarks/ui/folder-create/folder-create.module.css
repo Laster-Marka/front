@@ -1,0 +1,24 @@
+.folder-create-button {
+  margin: var(--m) var(--l);
+}
+
+.folder-modal-form-div{
+  display: flex;
+  flex-direction: column;
+  margin: 10rem 0 var(--m) 0;
+}
+
+.folder-modal-form-div>input{
+  height: 2rem;
+  width: 15rem;
+  background-color: var(--main-background-primary-color);
+  border-radius: 0.5rem;
+  color: var(--on-primary-color);
+  padding: 0 var(--m);
+}
+
+@media (max-width: 720px) {
+  .folder-create-button {
+    margin: var(--m) var(--s);
+  }
+}

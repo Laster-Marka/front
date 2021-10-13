@@ -1,3 +1,29 @@
+.card-main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.card-title>span {
+  color:var(--main-background-primary-color)
+}
+
+.card-tags {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.card-tags>span {
+  padding: 0 var(--base);
+  margin: var(--base);
+  font-weight: bold;
+  color:var(--background-primary-color);
+  border: var(--card-button-primary-color) var(--base) solid;
+  border-radius: var(--base);
+  background-color: var(--card-button-primary-color);
+}
+
 .mark-modal{
   display: flex;
   flex-direction: column;
@@ -44,8 +70,55 @@
   padding: 0 var(--m);
 }
 
-.mark-modal-create-button {
+.mark-modal-form-a{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin: var(--m);
+}
+
+.mark-modal-form-a-input {
+  margin: var(--m);
+}
+
+.mark-modal-form-a>a{
+  text-decoration: none;
+  color: var(--main-background-primary-color);
+}
+
+.mark-modal-form-a>a:hover{
+  filter: brightness(120%);
+  transform: translateY(-3px);
+}
+
+.mark-modal-edit-buttons {
+  margin: var(--m);
+}
+
+.mark-modal-edit-button {
+  margin: var(--s);
+}
+
+.edit {
+  color: var(--primary-color);
+  margin: 0.75rem;
+  zoom: 110%;
+}
+
+.edit:hover {
+  filter: brightness(180%);
+  transform: translateY(-3px);
+}
+
+.trash {
+  color: darkred;
+  margin: 0.75rem;
+  zoom: 110%;
+}
+
+.trash:hover {
+  filter: brightness(180%);
+  transform: translateY(-3px);
 }
 
 .ReactTags :global {
@@ -53,7 +126,6 @@
   /* Styles for the input */
   /* Styles for selected tags */
   /* Styles for suggestions */
-  margin: var(--l) 0 var(--s) 0;
 }
 .ReactTags :global .app {
   padding: 40px;
