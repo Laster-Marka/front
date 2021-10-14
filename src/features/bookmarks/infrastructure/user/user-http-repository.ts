@@ -23,8 +23,8 @@ export class UserHttpRepository implements UserRepository {
     return response.data
   }
 
-  async logOut(user: User): Promise<any> {
-    const response = await http.post('/user/logout', {getUserDto: this.userToUserDtoMapper.map(user)})
+  async logOut(): Promise<any> {
+    const response = await http.post('/user/logout')
     return response.data
   }
 
@@ -33,7 +33,9 @@ export class UserHttpRepository implements UserRepository {
     if(response === undefined){
       return null
     }
-
+    if(response.status === 401) {
+      return ""
+    }
     return response.data
   }
 

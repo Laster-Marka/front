@@ -6,7 +6,7 @@ import {CreateFolderDto} from "../../infrastructure/folder/create-folder-dto";
 export interface MarkRepository {
   findAll(): Promise<Folder[]>
   create(mark: CreateMarkDto, idFolder: string): Promise<any>
-  edit(mark: Mark, idFolder: string): Promise<any>
+  edit(mark: Mark): Promise<any>
   delete(mark: Mark, idFolder: string): Promise<any>
   createFolder(folder: CreateFolderDto): Promise<any>
   editFolder(folder: Folder): Promise<any>

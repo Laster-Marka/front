@@ -15,8 +15,8 @@ interface Props {
 
 export const Header: FC<Props> = ({user, userRepository, onUserAction}) => {
 
-  async function logOut(user: User) {
-    await userRepository.logOut(user)
+  async function logOut() {
+    await userRepository.logOut()
     onUserAction()
   }
 
@@ -29,7 +29,7 @@ export const Header: FC<Props> = ({user, userRepository, onUserAction}) => {
       <h2 className={cx('title')}>LASTER-MARKA</h2>
       <nav className={cx('navbar__right')}>
         {/*//TODO: Future functionality <Button className={cx('primary')}>Config</Button>*/}
-        <Button theme={'primary'} onClick={() => logOut(user)}>Logout</Button>
+        <Button name={user.name} theme={'primary'} onClick={() => logOut()}>Logout</Button>
       </nav>
     </header>
   )

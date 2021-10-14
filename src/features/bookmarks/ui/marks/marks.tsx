@@ -25,7 +25,6 @@ interface Props {
 export const Marks: FC<Props> = () => {
 
   const markRepository = MarkRepositoryFactory.build()
-  // const [marks, setMarks] = useState<MarkModel[]>([])
   const [folders, setFolders] = useState<Folder[]>([])
   const [currentFolder, setCurrentFolder] = useState("")
   const [isMarkModalOpen, setIsMarkModalOpen] = useState(false)
@@ -39,11 +38,7 @@ export const Marks: FC<Props> = () => {
   async function fetchMarks() {
     const getFoldersUseCase = new GetFoldersUseCase(markRepository)
     const allFolders = await getFoldersUseCase.execute()
-    // const getMarksUseCase = new GetMarksUseCase(markRepository)
-    // const allMarks = await getMarksUseCase.execute()
-
     setFolders(allFolders)
-    // setMarks(allMarks)
   }
   const isOneFolder = folders.length !== 0
 

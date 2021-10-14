@@ -6,7 +6,7 @@ import {UserRegister} from "./user-register";
 export interface UserRepository {
   signUp(user: UserRegister): Promise<User>
   logIn(user: UserLogin): Promise<User>
-  logOut(user: User): Promise<any>
+  logOut(): Promise<any>
   get(): Promise<User>
   edit(user: User): Promise<User>
   editPassword(editPassword: EditPassword): Promise<User>

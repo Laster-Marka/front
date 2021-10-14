@@ -65,10 +65,10 @@ export class UserLocalRepository implements UserRepository {
     return "db error"
   }
 
-  async logOut(user: User): Promise<any> {
+  async logOut(): Promise<any> {
     const userString = this.storage.getItem('active-user')
     let resultError: boolean = false
-    if (userString !== null && user !== null) {
+    if (userString !== null) {
       this.storage.setItem('active-user', JSON.stringify(""))
     } else{
       resultError = true
