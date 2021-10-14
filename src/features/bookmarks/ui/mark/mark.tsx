@@ -58,7 +58,7 @@ export const Mark: FC<Props> = ({ onClick, mark , markRepository, folderId, onMa
     mark.description = description
     mark.link = link
     mark.tags = tags.map((tag)=> {return {name:tag.text}})
-    await markRepository.edit(mark, folderId)
+    await markRepository.edit(mark)
     resetEditModal()
     onMarkEditOrDelete()
   }
