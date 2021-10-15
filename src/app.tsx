@@ -24,9 +24,9 @@ export const App: FC = () => {
   return (
     <>
       {!user ?
-        <Login onUserAction={fetchUsers} onLogOut={() => setUser(null)} userRepository={userRepository}/> :
+        <Login onUserAction={fetchUsers} userRepository={userRepository}/> :
         <>
-          <Header user={user} onUserAction={fetchUsers} userRepository={userRepository}/>
+          <Header user={user} onUserAction={fetchUsers} onLogOutAction={() => setUser(null)} userRepository={userRepository}/>
           <Marks user={user} onUserAction={fetchUsers}/>
         </>
       }
