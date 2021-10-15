@@ -10,7 +10,7 @@ import {User} from "./features/bookmarks/domain/user/user";
 export const App: FC = () => {
 
   const userRepository = UserRepositoryFactory.build()
-  const [user, setUser] = useState<User>()
+  const [user, setUser] = useState<User|null>()
 
   useEffect(() => {
     fetchUsers()
@@ -24,7 +24,7 @@ export const App: FC = () => {
   return (
     <>
       {!user ?
-        <Login onUserAction={fetchUsers} userRepository={userRepository}/> :
+        <Login onUserAction={fetchUsers} onLogOut={() => setUser(null)} userRepository={userRepository}/> :
         <>
           <Header user={user} onUserAction={fetchUsers} userRepository={userRepository}/>
           <Marks user={user} onUserAction={fetchUsers}/>

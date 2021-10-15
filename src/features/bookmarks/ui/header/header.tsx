@@ -11,12 +11,14 @@ interface Props {
   user: User
   userRepository: UserRepository
   onUserAction(): void
+  onLogOutAction(): void
 }
 
-export const Header: FC<Props> = ({user, userRepository, onUserAction}) => {
+export const Header: FC<Props> = ({user, userRepository, onUserAction, onLogOutAction}) => {
 
   async function logOut() {
     await userRepository.logOut()
+    onLogOutAction()
     onUserAction()
   }
 
