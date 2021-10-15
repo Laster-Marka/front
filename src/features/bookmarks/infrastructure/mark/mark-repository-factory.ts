@@ -14,7 +14,7 @@ import {FolderToEditFolderDtoMapper} from "../folder/folder-to-edit-folder-dto-m
 
 export class MarkRepositoryFactory {
   static build(): MarkRepository {
-    return new MarkHttpRepository(new MarkDtoToMarkMapper(new TagDtoToTagMapper()), new MarkToEditMarkDtoMapper(new TagToTagDtoMapper()), new FolderToEditFolderDtoMapper(), new FolderDtoToFolderMapper(new MarkDtoToMarkMapper(new TagDtoToTagMapper())))
+    return new MarkHttpRepository(new MarkToEditMarkDtoMapper(new TagToTagDtoMapper()), new FolderToEditFolderDtoMapper(), new FolderDtoToFolderMapper(new MarkDtoToMarkMapper(new TagDtoToTagMapper())))
   }
   static buildLocal(): MarkRepository {
     return new MarkLocalRepository(localStorage, new FolderDtoToFolderMapper(new MarkDtoToMarkMapper(new TagDtoToTagMapper())), new FolderToFolderDtoMapper(new MarkToMarkDtoMapper(new TagToTagDtoMapper())), new CreateFolderDtoToFolderMapper(), new CreateMarkDtoToMarkMapper())

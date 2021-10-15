@@ -1,7 +1,6 @@
 import {MarkRepository} from "../../domain/mark/mark-repository";
 import {Mark} from "../../domain/mark/mark";
 import {http} from "../../../../core/http/http";
-import {MarkDtoToMarkMapper} from "./mark-dto-to-mark-mapper";
 import {Folder} from "../../domain/folder/folder";
 import {CreateMarkDto} from "./create-mark-dto";
 import {MarkToEditMarkDtoMapper} from "./mark-to-edit-mark-dto";
@@ -15,7 +14,6 @@ import {FolderDto} from "../folder/folder-dto";
 
 export class MarkHttpRepository implements MarkRepository {
   constructor(
-    private readonly markDtoToMarkMapper: MarkDtoToMarkMapper,
     private readonly markToEditMarkDtoMapper: MarkToEditMarkDtoMapper,
     private readonly folderToEditFolderDtoMapper: FolderToEditFolderDtoMapper,
     private readonly folderDtoToFolderMapper: FolderDtoToFolderMapper
@@ -38,8 +36,7 @@ export class MarkHttpRepository implements MarkRepository {
   }
 
   async edit(mark: Mark): Promise<any> {
-    const response = await http.put(`/mark/${mark.id}`, {editMarkDto: this.markToEditMarkDtoMapper.map(mark)})
-    this.markDtoToMarkMapper.map(response.data)
+    await http.put(`/mark/${mark.id}`, {editMarkDto: this.markToEditMarkDtoMapper.map(mark)})
     return []
   }
 
