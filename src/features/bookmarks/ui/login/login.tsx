@@ -29,21 +29,24 @@ export const Login: FC<Props> = ({userRepository, onUserAction}) => {
 
   async function loginSubmitHandler(e:ChangeEvent<HTMLFormElement>) {
     setLoginError("")
+    setRegisterError("")
     e.preventDefault()
     const user: UserLogin = {email: loginEmail, password: loginPassword}
-    const result = await userRepository.logIn(user)
-    if(result.status){
-      setLoginError(result.status)
+    const resultError = await userRepository.logIn(user)
+    if(resultError){
+      setLoginError(resultError)
     }
     onUserAction()
   }
   async function registerSubmitHandler(e:ChangeEvent<HTMLFormElement>) {
+    setLoginError("")
     setRegisterError("")
     e.preventDefault()
     const user: UserRegister = {email: registerEmail, name: registerName, password: registerPassword, confirmPassword: registerConfirmPassword}
-    const result = await userRepository.signUp(user)
-    if(result.status){
-      setRegisterError(result.error)
+    const resultError = await userRepository.signUp(user)
+    if(resultError){
+      setRegisterError(resultError)
+      return
     }
     setIsRegisterModalOpen(false)
     onUserAction()

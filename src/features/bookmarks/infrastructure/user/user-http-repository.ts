@@ -15,19 +15,25 @@ export class UserHttpRepository implements UserRepository {
 
   async signUp(user: UserRegister): Promise<any> {
     if(user.password === user.confirmPassword) {
-      const response = await http.post('/user/signup', {createUserDto: user})
-      if(response.status) {
-        return response
-      }
-      return response.data
+      await http.post('/user/signup', {createUserDto: user}).catch((error) => {
+        if (error.response) {
+          return error.response.data.error
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
+        }
+      })
     }
-    //TODO: Diff pass
-    return null
+    return "Different Passwords"
   }
 
   async logIn(user: UserLogin): Promise<any> {
     await http.post('/user/login', {getUserDto: user}).catch((error) => {
       if (error.response) {
+        return error.response.data.error
         // Request made and server responded
         console.log(error.response.data);
         console.log(error.response.status);
