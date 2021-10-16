@@ -26,11 +26,20 @@ export class UserHttpRepository implements UserRepository {
   }
 
   async logIn(user: UserLogin): Promise<any> {
-    const response = await http.post('/user/login', {getUserDto: user})
-    if(+response.status > 300 && +response.status < 600) {
-      return response
-    }
-    return response.data
+    await http.post('/user/login', {getUserDto: user}).catch((error) => {
+      if (error.response) {
+        // Request made and server responded
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log(error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error', error.message);
+      }
+    })
   }
 
   async logOut(): Promise<any> {
