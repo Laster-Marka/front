@@ -16,7 +16,7 @@ export class UserHttpRepository implements UserRepository {
   async signUp(user: UserRegister): Promise<any> {
     if(user.password === user.confirmPassword) {
       const response = await http.post('/user/signup', {createUserDto: user})
-      if(response.status === 500) {
+      if(response.status) {
         return response
       }
       return response.data
