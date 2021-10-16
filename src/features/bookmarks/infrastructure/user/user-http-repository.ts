@@ -27,7 +27,7 @@ export class UserHttpRepository implements UserRepository {
 
   async logIn(user: UserLogin): Promise<any> {
     const response = await http.post('/user/login', {getUserDto: user})
-    if(response.status > 300 && response.status < 600) {
+    if(+response.status > 300 && +response.status < 600) {
       return response
     }
     return response.data
