@@ -4,8 +4,8 @@ import {UserLogin} from "./user-login";
 import {UserRegister} from "./user-register";
 
 export interface UserRepository {
-  signUp(user: UserRegister): Promise<User>
-  logIn(user: UserLogin): Promise<User>
+  signUp(user: UserRegister): Promise<User|any>
+  logIn(user: UserLogin): Promise<User|any>
   logOut(): Promise<any>
   get(): Promise<User>
   edit(user: User): Promise<User>

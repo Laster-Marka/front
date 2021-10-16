@@ -24,7 +24,7 @@ interface Props {
 
 export const Marks: FC<Props> = () => {
 
-  const markRepository = MarkRepositoryFactory.build()
+  const markRepository = MarkRepositoryFactory.buildLocal()
   const [folders, setFolders] = useState<Folder[]>([])
   const [currentFolder, setCurrentFolder] = useState("")
   const [isMarkModalOpen, setIsMarkModalOpen] = useState(false)

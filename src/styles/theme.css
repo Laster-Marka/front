@@ -1,12 +1,21 @@
 :root {
   /* Palette   #88BDBC  #254E58 #112D32  #4F4A41   #6E6658*/
-  --background-primary-color: #254E58;
+  /*--background-primary-color: #254E58;*/
+  /*--primary-color: #4F4A41;*/
+  /*--on-primary-color: white;*/
+  /*--main-background-primary-color: #88BDBC;*/
+  /*--card-primary-color: #6E6658;*/
+  /*!*--card-primary-color: #74a2a1;#805A40 #928877*!*/
+  /*--card-button-primary-color: #9b998d;*/
+
+  --background-primary-color: #a06337;
   --primary-color: #4F4A41;
-  --on-primary-color: white;
-  --main-background-primary-color: #88BDBC;
-  --card-primary-color: #6E6658;
+  --on-primary-color: #ffffd3;
+  --on-primary-main-color: #a06337;
+  --main-background-primary-color: #ffe352;
+  --card-primary-color: #9b998d;
   /*--card-primary-color: #74a2a1;#805A40 #928877*/
-  --card-button-primary-color: #9b998d;
+  --card-button-primary-color: #6E6658;
 
   --background-secondary-color: #254E58;
   --secondary-color: rebeccapurple;

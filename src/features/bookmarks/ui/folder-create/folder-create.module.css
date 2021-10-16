@@ -8,12 +8,18 @@
   margin: 10rem 0 var(--m) 0;
 }
 
+.folder-modal-form-div>label{
+  color: var(--on-primary-color);
+}
+
 .folder-modal-form-div>input{
   height: 2rem;
   width: 15rem;
   background-color: var(--main-background-primary-color);
   border-radius: 0.5rem;
-  color: var(--on-primary-color);
+  border: 2px solid var(--on-primary-main-color);
+  color: var(--on-primary-main-color);
+  font-weight: bold;
   padding: 0 var(--m);
 }
 

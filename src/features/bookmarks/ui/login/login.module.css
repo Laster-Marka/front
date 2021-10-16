@@ -33,6 +33,10 @@ form .form-inner .form-group label {
 form .form-inner .form-group input {
   padding: var(--s);
   border-radius: var(--s);
+  background-color: var(--main-background-primary-color);
+  color: var(--on-primary-main-color);
+  border: 2px solid var(--card-button-primary-color);
+  font-weight: bold;
 }
 
 .pass-margin {
@@ -88,12 +92,18 @@ form .form-inner .form-group input {
   flex-direction: column;
 }
 
+.register-modal-form-div>label{
+  color: var(--on-primary-color);
+}
+
 .register-modal-form-div>input{
   height: 2rem;
   width: 15rem;
   background-color: var(--main-background-primary-color);
   border-radius: 0.5rem;
-  color: var(--on-primary-color);
+  color: var(--on-primary-main-color);
+  border: 2px solid var(--on-primary-main-color);
+  font-weight: bold;
   padding: 0 var(--m);
 }
 

@@ -16,6 +16,7 @@
 .mark-modal-select{
   width: 10rem;
   justify-content: center;
+  color: var(--on-primary-main-color);
 }
 
 .mark-modal-select>div{
@@ -35,12 +36,18 @@
   flex-direction: column;
 }
 
+.mark-modal-form-div>label{
+  color: var(--on-primary-color);
+}
+
 .mark-modal-form-div>input{
   height: 2rem;
   width: 15rem;
   background-color: var(--main-background-primary-color);
   border-radius: 0.5rem;
-  color: var(--on-primary-color);
+  border: 2px solid var(--on-primary-main-color);
+  color: var(--on-primary-main-color);
+  font-weight: bold;
   padding: 0 var(--m);
 }
 
@@ -53,7 +60,6 @@
   /* Styles for the input */
   /* Styles for selected tags */
   /* Styles for suggestions */
-  margin: var(--l) 0 var(--s) 0;
 }
 .ReactTags :global .app {
   padding: 40px;
@@ -72,11 +78,12 @@
 }
 .ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField, .ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField:focus {
   height: 31px;
-  margin: 0;
+  margin: var(--m) 0 ;
   font-size: 12px;
-  border: 2px solid var(--on-primary-color);
+  border: 2px solid var(--on-primary-main-color);
   border-radius: var(--s);
-  color: var(--on-primary-color);
+  color: var(--on-primary-main-color);
+  font-weight: bold;
   background-color: var(--main-background-primary-color);
   min-width: 150px;
 }
@@ -87,9 +94,10 @@
   display: inline-flex;
 }
 .ReactTags :global .ReactTags__selected span.ReactTags__tag {
-  border: 1px solid var(--on-primary-color);;
+  border: 1px solid var(--on-primary-main-color);
   background: var(--main-background-primary-color);
-  color: var(--on-primary-color);
+  color: var(--on-primary-main-color);
+  font-weight: bold;
   font-size: 12px;
   display: inline-block;
   padding: 5px;
@@ -108,5 +116,7 @@
   border: none;
   cursor: pointer;
   background: none;
-  color: white;
+  color: var(--on-primary-main-color);
+  font-weight: bold;
 }
+

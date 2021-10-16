@@ -14,12 +14,22 @@ export class UserHttpRepository implements UserRepository {
   ) {}
 
   async signUp(user: UserRegister): Promise<any> {
-    const response = await http.post('/user/signup', {createUserDto: user})
-    return response.data
+    if(user.password === user.confirmPassword) {
+      const response = await http.post('/user/signup', {createUserDto: user})
+      if(response.status === 500) {
+        return response
+      }
+      return response.data
+    }
+    //TODO: Diff pass
+    return null
   }
 
   async logIn(user: UserLogin): Promise<any> {
     const response = await http.post('/user/login', {getUserDto: user})
+    if(response.status > 300 && response.status < 600) {
+      return response
+    }
     return response.data
   }
 

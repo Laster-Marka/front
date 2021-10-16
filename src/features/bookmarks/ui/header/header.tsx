@@ -25,7 +25,7 @@ export const Header: FC<Props> = ({user, userRepository, onUserAction, onLogOutA
   return (
     <header className={cx('navbar')}>
       <nav className={cx('navbar__left')}>
-        <img src={"./logo_v2.PNG"} className={cx('navbar__logo')}></img>
+        <img src={"./logo_v3.PNG"} className={cx('navbar__logo')}></img>
       </nav>
       {/*//TODO: Future functionality <input type="search" placeholder="Search" className={cx('navbar__search')}/>*/}
       <h2 className={cx('title')}>LASTER-MARKA</h2>
