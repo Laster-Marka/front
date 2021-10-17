@@ -33,7 +33,7 @@ export class UserHttpRepository implements UserRepository {
   async logIn(user: UserLogin): Promise<any> {
     await http.post('/user/login', {getUserDto: user}).catch((error) => {
       if (error.response) {
-        return error.response.data.error
+        return error.response.data
         // Request made and server responded
         console.log(error.response.data);
         console.log(error.response.status);
