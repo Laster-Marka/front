@@ -45,13 +45,13 @@ export const Login: FC<Props> = ({userRepository, onUserAction}) => {
     setRegisterError("")
     e.preventDefault()
     const user: UserRegister = {email: registerEmail, name: registerName, password: registerPassword, confirmPassword: registerConfirmPassword}
-    const resultError = await userRepository.signUp(user)
-    if(resultError){
-      setRegisterError(resultError)
-      return
+    try {
+      await userRepository.signUp(user)
+      setIsRegisterModalOpen(false)
+      onUserAction()
+    } catch (e) {
+      setRegisterError(e.error)
     }
-    setIsRegisterModalOpen(false)
-    onUserAction()
   }
 
   return (
