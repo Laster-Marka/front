@@ -34,11 +34,12 @@ export const Login: FC<Props> = ({userRepository, onUserAction}) => {
     setRegisterError("")
     e.preventDefault()
     const user: UserLogin = {email: loginEmail, password: loginPassword}
-    const resultError = await userRepository.logIn(user)
-    if(resultError.error){
-      setLoginError(resultError.error)
+    try {
+      await userRepository.logIn(user)
+      onUserAction()
+    } catch (e) {
+      setLoginError(e.error)
     }
-    onUserAction()
   }
   async function registerSubmitHandler(e:ChangeEvent<HTMLFormElement>) {
     setLoginError("")
