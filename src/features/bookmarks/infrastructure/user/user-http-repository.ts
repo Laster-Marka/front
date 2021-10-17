@@ -31,7 +31,7 @@ export class UserHttpRepository implements UserRepository {
   }
 
   async logIn(user: UserLogin): Promise<any> {
-    await http.post('/user/login', {getUserDto: user}).catch((error) => {
+    return await http.post('/user/login', {getUserDto: user}).catch((error) => {
       if (error.response) {
         return error.response.data.error
         // Request made and server responded
