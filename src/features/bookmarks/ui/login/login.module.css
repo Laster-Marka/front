@@ -121,6 +121,10 @@ form .form-inner .form-group input {
   color: #d93025;
 }
 
+.exclamation-circle {
+  margin-right: var(--s);
+}
+
 @media (max-width: 720px) {
   .register-modal-form-div>input{
     height: 2rem;

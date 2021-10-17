@@ -37,6 +37,7 @@ export const Login: FC<Props> = ({userRepository, onUserAction}) => {
     const resultError = await userRepository.logIn(user)
     if(resultError){
       setLoginError(resultError)
+      return
     }
     onUserAction()
   }
@@ -60,7 +61,7 @@ export const Login: FC<Props> = ({userRepository, onUserAction}) => {
         <form onSubmit={loginSubmitHandler}>
           <div className={cx("form-inner")}>
             <h2 className={cx('title')}>LASTER-MARKA</h2>
-            {(loginError !== "") ? (<div className={"form-error"}><FontAwesomeIcon icon={faExclamationCircle} className={cx('exclamation-circle')}/><span>{loginError}</span></div>) : null}
+            {(loginError !== "") ? (<div className={cx("form-error")}><FontAwesomeIcon icon={faExclamationCircle} className={cx('exclamation-circle')}/><span>{loginError}</span></div>) : null}
             <div className={cx('form-group')}>
               <label>Email</label>
               <input type={"email"} required={true} value={loginEmail} onChange={event => setLoginEmail(event.target.value)} />
@@ -80,7 +81,7 @@ export const Login: FC<Props> = ({userRepository, onUserAction}) => {
         <div className={cx('register-modal')}>
           <div className={cx('register-modal-content')}>
             <form onSubmit={registerSubmitHandler}>
-              {(registerError !== "") ? (<div  className={cx('form-error')}>{registerError}</div>) : null}
+              {(registerError !== "") ? (<div className={cx("form-error")}><FontAwesomeIcon icon={faExclamationCircle} className={cx('exclamation-circle')}/><span>{registerError}</span></div>) : null}
               <div className={cx('form-group', 'register-modal-form-div')}>
                 <label>Email</label>
                 <input type={"email"} required={true} value={registerEmail} onChange={event => setRegisterEmail(event.target.value)} />

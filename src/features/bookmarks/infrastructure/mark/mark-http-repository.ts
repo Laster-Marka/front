@@ -6,7 +6,6 @@ import {CreateMarkDto} from "./create-mark-dto";
 import {MarkToEditMarkDtoMapper} from "./mark-to-edit-mark-dto";
 import {CreateFolderDto} from "../folder/create-folder-dto";
 import {FolderToEditFolderDtoMapper} from "../folder/folder-to-edit-folder-dto-mapper";
-import {EditFolderDto} from "../folder/edit-folder-dto";
 import {AxiosResponse} from "axios";
 import {FolderDtoToFolderMapper} from "../folder/folder-dto-to-folder-mapper"
 import {FoldersContent} from "../folder/folders-content";
@@ -18,6 +17,19 @@ export class MarkHttpRepository implements MarkRepository {
     private readonly folderToEditFolderDtoMapper: FolderToEditFolderDtoMapper,
     private readonly folderDtoToFolderMapper: FolderDtoToFolderMapper
   ) {}
+
+  private checkCatchedError(error: any) {
+    if (error.response) {
+      if(error.response.status === 401) {
+        return error.response.status.toString()
+      }
+      return error.response.data.message
+    } else if (error.request) {
+      return "No response"
+    } else {
+      return "Wrong request"
+    }
+  }
 
   async findAll(): Promise<any> {
     const response: AxiosResponse = await http.get('/home')
@@ -32,34 +44,40 @@ export class MarkHttpRepository implements MarkRepository {
   }
 
   async create(createMarkDto: CreateMarkDto, idFolder: string): Promise<any> {
-    await http.post('/mark', {createMarkDto: createMarkDto, folderId: idFolder})
+    return await http.post('/mark', {createMarkDto: createMarkDto, folderId: idFolder}).catch((error) => {
+      return this.checkCatchedError(error)
+    })
   }
 
   async edit(mark: Mark): Promise<any> {
-    await http.put(`/mark/${mark.id}`, {editMarkDto: this.markToEditMarkDtoMapper.map(mark)})
-    return []
+    return await http.put(`/mark/${mark.id}`, {editMarkDto: this.markToEditMarkDtoMapper.map(mark)}).catch((error) => {
+      return this.checkCatchedError(error)
+    })
   }
 
   async delete(mark: Mark): Promise<any> {
-    await http.delete(`/mark/${mark.id}`)
-    return 1
+    return await http.delete(`/mark/${mark.id}`).catch((error) => {
+      return this.checkCatchedError(error)
+    })
   }
 
   async createFolder(createFolderDto: CreateFolderDto): Promise<any> {
     //TODO
     createFolderDto.color = "60cb9f4748aa37109ef88e7f"
-    const response = await http.post('/folder', {createFolderDto: createFolderDto})
-    const folder = this.folderDtoToFolderMapper.map(response.data)
-    return folder
+    return await http.post('/folder', {createFolderDto: createFolderDto}).catch((error) => {
+      return this.checkCatchedError(error)
+    })
   }
 
   async editFolder(folder: Folder): Promise<any> {
-    const editFolderDto: EditFolderDto = this.folderToEditFolderDtoMapper.map(folder)
-    await http.put(`/folder/${folder.id}`, {editFolderDto: editFolderDto})
+    return await http.put(`/folder/${folder.id}`, {editFolderDto: this.folderToEditFolderDtoMapper.map(folder)}).catch((error) => {
+      return this.checkCatchedError(error)
+    })
   }
 
   async deleteFolder(id: string): Promise<any> {
-    await http.delete(`/folder/${id}`)
-    return 1
+    return await http.delete(`/folder/${id}`).catch((error) => {
+      return this.checkCatchedError(error)
+    })
   }
 }
