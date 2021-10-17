@@ -29,7 +29,7 @@ export const Marks: FC<Props> = ({onUserAction}) => {
   const [isMarkModalOpen, setIsMarkModalOpen] = useState(false)
   const [isDeleteFolderModalOpen, setIsDeleteFolderModalOpen] = useState(false)
   const [deleteFolderID, setDeleteFolderID] = useState("")
-  const [error, setError] = useState("")
+  const [error, serError] = useState("")
 
   useEffect(() => {
     fetchMarks()
@@ -41,19 +41,6 @@ export const Marks: FC<Props> = ({onUserAction}) => {
     setFolders(allFolders)
   }
   const isOneFolder = folders.length !== 0
-
-  // function onMarkCreated(newMark: MarkModel, folders: Folder[], folderId: string) {
-  //   setIsMarkModalOpen(false)
-  //   const markFolderIndex = folders.findIndex(i => i.id === folderId)
-  //   folders[markFolderIndex].marks.push(newMark)
-  //   setFolders(folders)
-  //   fetchMarks()
-  // }
-  //
-  // function onFolderCreated(newFolder: Folder) {
-  //   setFolders([...folders, newFolder])
-  //   fetchMarks()
-  // }
 
   function onMarkCreated() {
     setIsMarkModalOpen(false)
@@ -69,9 +56,8 @@ export const Marks: FC<Props> = ({onUserAction}) => {
     setDeleteFolderID("")
     const resultError = await markRepository.deleteFolder(id)
     if (resultError === '401') {
+      serError("")
       onUserAction()
-    } else if (resultError) {
-      setError(resultError)
     }
     fetchMarks()
   }
@@ -102,7 +88,7 @@ export const Marks: FC<Props> = ({onUserAction}) => {
             </>
             ))) : null
         }
-        <CreateMark markRepository={markRepository} folderId={currentFolder} isModalOpened={isMarkModalOpen} onMarkCreated={() => onMarkCreated()} onModalReset={() => setIsMarkModalOpen(false)}></CreateMark>
+        <CreateMark markRepository={markRepository} folderId={currentFolder} isModalOpened={isMarkModalOpen} onMarkCreated={() => onMarkCreated()} onModalReset={() => setIsMarkModalOpen(false)} onUserAction={() => onUserAction()}></CreateMark>
         <Modal isOpened={isDeleteFolderModalOpen} onExitModal={() => {setIsDeleteFolderModalOpen(false); setDeleteFolderID("")}}>
           <FontAwesomeIcon icon={faExclamationTriangle} className={cx('exclamation-triangle')}/>
           <div className={cx("folder-delete-modal")}>The folder will be deleted, including all bookmarks in the folder!</div>

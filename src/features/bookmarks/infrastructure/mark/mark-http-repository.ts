@@ -44,19 +44,25 @@ export class MarkHttpRepository implements MarkRepository {
   }
 
   async create(createMarkDto: CreateMarkDto, idFolder: string): Promise<any> {
-    return await http.post('/mark', {createMarkDto: createMarkDto, folderId: idFolder}).catch((error) => {
+    return await http.post('/mark', {createMarkDto: createMarkDto, folderId: idFolder}).then(() => {
+      return null
+    }).catch((error) => {
       return this.checkCatchedError(error)
     })
   }
 
   async edit(mark: Mark): Promise<any> {
-    return await http.put(`/mark/${mark.id}`, {editMarkDto: this.markToEditMarkDtoMapper.map(mark)}).catch((error) => {
+    return await http.put(`/mark/${mark.id}`, {editMarkDto: this.markToEditMarkDtoMapper.map(mark)}).then(() => {
+      return null
+    }).catch((error) => {
       return this.checkCatchedError(error)
     })
   }
 
   async delete(mark: Mark): Promise<any> {
-    return await http.delete(`/mark/${mark.id}`).catch((error) => {
+    return await http.delete(`/mark/${mark.id}`).then(() => {
+      return null
+    }).catch((error) => {
       return this.checkCatchedError(error)
     })
   }
@@ -64,19 +70,25 @@ export class MarkHttpRepository implements MarkRepository {
   async createFolder(createFolderDto: CreateFolderDto): Promise<any> {
     //TODO
     createFolderDto.color = "60cb9f4748aa37109ef88e7f"
-    return await http.post('/folder', {createFolderDto: createFolderDto}).catch((error) => {
+    return await http.post('/folder', {createFolderDto: createFolderDto}).then(() => {
+      return null
+    }).catch((error) => {
       return this.checkCatchedError(error)
     })
   }
 
   async editFolder(folder: Folder): Promise<any> {
-    return await http.put(`/folder/${folder.id}`, {editFolderDto: this.folderToEditFolderDtoMapper.map(folder)}).catch((error) => {
+    return await http.put(`/folder/${folder.id}`, {editFolderDto: this.folderToEditFolderDtoMapper.map(folder)}).then(() => {
+      return null
+    }).catch((error) => {
       return this.checkCatchedError(error)
     })
   }
 
   async deleteFolder(id: string): Promise<any> {
-    return await http.delete(`/folder/${id}`).catch((error) => {
+    return await http.delete(`/folder/${id}`).then(() => {
+      return null
+    }).catch((error) => {
       return this.checkCatchedError(error)
     })
   }

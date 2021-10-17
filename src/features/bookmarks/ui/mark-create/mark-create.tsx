@@ -1,7 +1,6 @@
 import {FC, useState} from "react";
 import {Button} from "../../../../core/components/button/button";
 import {Modal} from "../../../../core/components/modal/modal";
-import {Mark} from "../../domain/mark/mark";
 import {MarkRepository} from "../../domain/mark/mark-repository";
 import {CreateMarkDto} from "../../infrastructure/mark/create-mark-dto";
 import Select from "react-select";
@@ -9,6 +8,8 @@ import {Type, typeOptions} from "../../domain/mark/type";
 import {Tag as ReactTag, WithContext as ReactTags} from "react-tag-input"
 import styles from "../mark-create/mark-create.module.css";
 import {bind} from "../../../../utils/bind";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
 
 const cx = bind(styles)
 
@@ -16,23 +17,30 @@ interface Props {
   markRepository: MarkRepository
   folderId: string
   isModalOpened: boolean
-  onMarkCreated(mark: Mark): void
+  onMarkCreated(): void
   onModalReset(): void
+  onUserAction(): void
 }
 
-export const CreateMark: FC<Props> = ({ markRepository , folderId, isModalOpened, onMarkCreated, onModalReset}) => {
+export const CreateMark: FC<Props> = ({ markRepository , folderId, isModalOpened, onMarkCreated, onModalReset, onUserAction}) => {
 
   const [type, setType] = useState<Type>('Text')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [link, setLink] = useState('')
   const [tags, setTags] = useState<ReactTag[]>([])
+  const [error, setError] = useState("")
 
   async function createMark(folderId: string) {
     const createMarkDto: CreateMarkDto = { title: title, link: link, type: type, tags: tags.map((tag)=> {return {name:tag.text}}), description: description, image: "", markdown: "" }
-    const newMark = await markRepository.create(createMarkDto, folderId)
+    const resultError = await markRepository.create(createMarkDto, folderId)
+    if (resultError === '401') {
+      onUserAction()
+    } else if (resultError) {
+      setError(resultError)
+    }
     resetModal()
-    onMarkCreated(newMark)
+    onMarkCreated()
   }
 
   const handleDrag = (tag:ReactTag, currPos:number, newPos:number) => {
@@ -47,6 +55,7 @@ export const CreateMark: FC<Props> = ({ markRepository , folderId, isModalOpened
   return (
     <Modal isOpened={isModalOpened} onExitModal={resetModal}>
       <div className={cx('mark-modal')}>
+        {(error !== "") ? (<div className={cx("form-error")}><FontAwesomeIcon icon={faExclamationCircle} className={cx('exclamation-circle')}/><span>{error}</span></div>) : null}
         <div className={cx('mark-modal-content')}>
           <Select className={cx('mark-modal-select')} isDisabled={false} isLoading={false} name={"markTypes"} onChange={event => {
             const comboOption: {value: Type, label: string} | undefined = typeOptions.find(option => option.value === event?.value)

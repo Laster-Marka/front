@@ -23,6 +23,19 @@
   padding: 0 var(--m);
 }
 
+.form-error {
+  padding: var(--s);
+}
+
+.form-error>span {
+  color: #d93025;
+}
+
+.exclamation-circle {
+  margin-right: var(--s);
+  color: #d93025;
+}
+
 @media (max-width: 720px) {
   .folder-create-button {
     margin: var(--m) var(--s);

@@ -23,7 +23,9 @@ export class UserHttpRepository implements UserRepository {
 
   async signUp(user: UserRegister): Promise<any> {
     if(user.password === user.confirmPassword) {
-      return await http.post('/user/signup', {createUserDto: user}).catch((error) => {
+      return await http.post('/user/signup', {createUserDto: user}).then(() => {
+        return null
+      }).catch((error) => {
         return this.checkCatchedError(error)
       })
     }
@@ -39,7 +41,9 @@ export class UserHttpRepository implements UserRepository {
   }
 
   async logOut(): Promise<any> {
-    return await http.post('/user/logout').catch((error) => {
+    return await http.post('/user/logout').then(() => {
+      return null
+    }).catch((error) => {
       return this.checkCatchedError(error)
     })
   }
@@ -53,19 +57,25 @@ export class UserHttpRepository implements UserRepository {
   }
 
   async edit(user: User): Promise<any> {
-    return await http.put(`/user`, {editMarkDto: this.userToUserDtoMapper.map(user)}).catch((error) => {
+    return await http.put(`/user`, {editMarkDto: this.userToUserDtoMapper.map(user)}).then(() => {
+      return null
+    }).catch((error) => {
       return this.checkCatchedError(error)
     })
   }
 
   async editPassword(editPassword: EditPassword): Promise<any> {
-    return await http.put(`/user/password`, {editPasswordDto: editPassword}).catch((error) => {
+    return await http.put(`/user/password`, {editPasswordDto: editPassword}).then(() => {
+      return null
+    }).catch((error) => {
       return this.checkCatchedError(error)
     })
   }
 
   async delete(user: User): Promise<any> {
-    return await http.delete(`/edit/${user.name}`).catch((error) => {
+    return await http.delete(`/edit/${user.name}`).then(() => {
+      return null
+    }).catch((error) => {
       return this.checkCatchedError(error)
     })
   }

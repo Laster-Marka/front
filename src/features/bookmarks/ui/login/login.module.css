@@ -117,12 +117,13 @@ form .form-inner .form-group input {
   padding: var(--s);
 }
 
-.form-error>span .exclamation-circle {
+.form-error>span {
   color: #d93025;
 }
 
 .exclamation-circle {
   margin-right: var(--s);
+  color: #d93025;
 }
 
 @media (max-width: 720px) {
