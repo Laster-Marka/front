@@ -17,7 +17,7 @@ export class UserHttpRepository implements UserRepository {
     if(user.password === user.confirmPassword) {
       await http.post('/user/signup', {createUserDto: user}).catch((error) => {
         if (error.response) {
-          return error.response.data.error
+          return error.response.data
         } else if (error.request) {
           // The request was made but no response was received
           console.log(error.request);

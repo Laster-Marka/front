@@ -6,6 +6,8 @@ import styles from './login.module.css'
 import {UserRepository} from "../../domain/user/user-repository";
 import {UserLogin} from "../../domain/user/user-login";
 import {UserRegister} from "../../domain/user/user-register";
+import {faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const cx = bind(styles)
 
@@ -33,8 +35,8 @@ export const Login: FC<Props> = ({userRepository, onUserAction}) => {
     e.preventDefault()
     const user: UserLogin = {email: loginEmail, password: loginPassword}
     const resultError = await userRepository.logIn(user)
-    if(resultError){
-      setLoginError(resultError)
+    if(resultError.error){
+      setLoginError(resultError.error)
     }
     onUserAction()
   }
@@ -58,7 +60,7 @@ export const Login: FC<Props> = ({userRepository, onUserAction}) => {
         <form onSubmit={loginSubmitHandler}>
           <div className={cx("form-inner")}>
             <h2 className={cx('title')}>LASTER-MARKA</h2>
-            {(loginError !== "") ? (<div className={"form-error"}>{loginError}</div>) : null}
+            {(loginError !== "") ? (<div className={"form-error"}><FontAwesomeIcon icon={faExclamationCircle} className={cx('exclamation-circle')}/><span>{loginError}</span></div>) : null}
             <div className={cx('form-group')}>
               <label>Email</label>
               <input type={"email"} required={true} value={loginEmail} onChange={event => setLoginEmail(event.target.value)} />
