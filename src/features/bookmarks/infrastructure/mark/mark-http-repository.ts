@@ -22,8 +22,10 @@ export class MarkHttpRepository implements MarkRepository {
     if (error.response) {
       if(error.response.status === 401) {
         return error.response.status.toString()
+      } else if (error.response.data.message) {
+        return error.response.data.message
       }
-      return error.response.data.message
+      return "Wrong response"
     } else if (error.request) {
       return "No response"
     } else {

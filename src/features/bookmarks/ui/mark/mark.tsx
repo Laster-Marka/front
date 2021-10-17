@@ -9,7 +9,7 @@ import {Type, typeOptions} from "../../domain/mark/type";
 import {Tag as ReactTag, WithContext as ReactTags} from 'react-tag-input';
 import styles from "../../ui/mark/mark.module.css";
 import {bind} from "../../../../utils/bind";
-import {faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faEdit, faExclamationCircle, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const cx = bind(styles)
@@ -20,9 +20,10 @@ interface Props {
   markRepository: MarkRepository
   folderId: string
   onMarkEditOrDelete(): void
+  onUserAction(): void
 }
 
-export const Mark: FC<Props> = ({ onClick, mark , markRepository, folderId, onMarkEditOrDelete}) => {
+export const Mark: FC<Props> = ({ onClick, mark , markRepository, folderId, onMarkEditOrDelete, onUserAction}) => {
 
   const [isOpen, setIsOpen] = useState(false)
   const [isTitleDisable, setIsTitleDisable] = useState(true)
@@ -35,13 +36,18 @@ export const Mark: FC<Props> = ({ onClick, mark , markRepository, folderId, onMa
   const [description, setDescription] = useState(mark.description)
   const [link, setLink] = useState(mark.link)
   const [tags, setTags] = useState<ReactTag[]>(mark.tags.map((tag)=> {return{id:tag.name,text:tag.name}}))
+  const [error, serError] = useState("")
 
 
   useEffect(() => {
   }, [isOpen])
 
   async function deleteMark() {
-    await markRepository.delete(mark, folderId)
+    const resultError = await markRepository.delete(mark, folderId)
+    if (resultError === '401') {
+      serError("")
+      onUserAction()
+    }
     onMarkEditOrDelete()
   }
 
@@ -58,7 +64,11 @@ export const Mark: FC<Props> = ({ onClick, mark , markRepository, folderId, onMa
     mark.description = description
     mark.link = link
     mark.tags = tags.map((tag)=> {return {name:tag.text}})
-    await markRepository.edit(mark)
+    const resultError = await markRepository.edit(mark)
+    if (resultError === '401') {
+      serError("")
+      onUserAction()
+    }
     resetEditModal()
     onMarkEditOrDelete()
   }
@@ -103,6 +113,7 @@ export const Mark: FC<Props> = ({ onClick, mark , markRepository, folderId, onMa
     </Card>
   <Modal isOpened={isOpen} onExitModal={() => setIsOpen(false)}>
     <div className={cx('mark-modal')}>
+      {(error !== "") ? (<div className={cx("form-error")}><FontAwesomeIcon icon={faExclamationCircle} className={cx('exclamation-circle')}/><span>{error}</span></div>) : null}
       <FontAwesomeIcon icon={faTrash} className={cx('trash')} onClick={deleteMark} />
       <div className={cx('mark-modal-content')}>
       <Select className={cx('mark-modal-select')} isDisabled={false} isLoading={false} name={"markTypes"} onChange={event => {

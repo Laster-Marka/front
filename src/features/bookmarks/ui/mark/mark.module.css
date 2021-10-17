@@ -128,6 +128,19 @@
   transform: translateY(-3px);
 }
 
+.form-error {
+  padding: var(--s);
+}
+
+.form-error>span {
+  color: #d93025;
+}
+
+.exclamation-circle {
+  margin-right: var(--s);
+  color: #d93025;
+}
+
 .ReactTags :global {
   /* Example Styles for React Tags*/
   /* Styles for the input */

@@ -43,7 +43,7 @@
 }
 
 .form-error>span {
-  color: #d93025;
+  color: var(--on-primary-color);
 }
 
 .exclamation-circle {

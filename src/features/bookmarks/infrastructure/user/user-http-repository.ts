@@ -13,7 +13,10 @@ export class UserHttpRepository implements UserRepository {
 
   private checkCatchedError(error: any) {
     if (error.response) {
-      return error.response.data.message
+      if (error.response.data.message) {
+        return error.response.data.message
+      }
+      return "Wrong response"
     } else if (error.request) {
       return "No response"
     } else {

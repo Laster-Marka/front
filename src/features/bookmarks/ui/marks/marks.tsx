@@ -65,7 +65,7 @@ export const Marks: FC<Props> = ({onUserAction}) => {
   return (
     <main>
       <div className={cx("main-div")}>
-        <CreateFolder markRepository={markRepository} onFolderCreated={() => onFolderCreated()} onUserAction={() => onUserAction()}/>
+        <CreateFolder markRepository={markRepository} onFolderCreated={onFolderCreated} onUserAction={onUserAction}/>
         {(error !== "") ? (<div className={cx("form-error")}><FontAwesomeIcon icon={faExclamationCircle} className={cx('exclamation-circle')}/><span>{error}</span></div>) : null}
         {isOneFolder ? (
           folders.map(folder => (
@@ -80,7 +80,7 @@ export const Marks: FC<Props> = ({onUserAction}) => {
                 <div className={cx('card-list')}>
                 {folder.marks.length !== 0 ? (
                   folder.marks.map(mark => (
-                    <Mark key={mark.id} folderId={folder.id} onClick={() => {}} mark={mark} markRepository={markRepository} onMarkEditOrDelete={fetchMarks}>{mark.title}</Mark>
+                    <Mark key={mark.id} folderId={folder.id} onClick={() => {}} mark={mark} markRepository={markRepository} onMarkEditOrDelete={fetchMarks} onUserAction={onUserAction}>{mark.title}</Mark>
                   ))) : null
                 }
                 </div>
@@ -88,7 +88,7 @@ export const Marks: FC<Props> = ({onUserAction}) => {
             </>
             ))) : null
         }
-        <CreateMark markRepository={markRepository} folderId={currentFolder} isModalOpened={isMarkModalOpen} onMarkCreated={() => onMarkCreated()} onModalReset={() => setIsMarkModalOpen(false)} onUserAction={() => onUserAction()}></CreateMark>
+        <CreateMark markRepository={markRepository} folderId={currentFolder} isModalOpened={isMarkModalOpen} onMarkCreated={onMarkCreated} onModalReset={() => setIsMarkModalOpen(false)} onUserAction={onUserAction}/>
         <Modal isOpened={isDeleteFolderModalOpen} onExitModal={() => {setIsDeleteFolderModalOpen(false); setDeleteFolderID("")}}>
           <FontAwesomeIcon icon={faExclamationTriangle} className={cx('exclamation-triangle')}/>
           <div className={cx("folder-delete-modal")}>The folder will be deleted, including all bookmarks in the folder!</div>
