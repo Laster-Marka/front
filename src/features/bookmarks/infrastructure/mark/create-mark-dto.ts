@@ -1,5 +1,5 @@
-import {Tag} from "../../domain/tag/tag";
-import {Type} from "../../domain/mark/type";
+import { Tag } from '../../domain/tag/tag'
+import { Type } from '../../domain/mark/type'
 
 export interface CreateMarkDto {
   title: string

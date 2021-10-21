@@ -1,5 +1,5 @@
-import {Type} from "../../domain/mark/type";
-import {TagDto} from "../tag/tag-dto";
+import { Type } from '../../domain/mark/type'
+import { TagDto } from '../tag/tag-dto'
 
 export interface EditMarkDto {
   title: string

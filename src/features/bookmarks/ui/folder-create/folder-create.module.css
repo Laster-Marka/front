@@ -2,17 +2,17 @@
   margin: var(--m) var(--l);
 }
 
-.folder-modal-form-div{
+.folder-modal-form-div {
   display: flex;
   flex-direction: column;
   margin: 10rem 0 var(--m) 0;
 }
 
-.folder-modal-form-div>label{
+.folder-modal-form-div > label {
   color: var(--on-primary-color);
 }
 
-.folder-modal-form-div>input{
+.folder-modal-form-div > input {
   height: 2rem;
   width: 15rem;
   background-color: var(--main-background-primary-color);
@@ -27,7 +27,7 @@
   padding: var(--s);
 }
 
-.form-error>span {
+.form-error > span {
   color: #d93025;
 }
 

@@ -5,8 +5,8 @@
   justify-content: space-between;
 }
 
-.card-title>span {
-  color:var(--main-background-primary-color)
+.card-title > span {
+  color: var(--main-background-primary-color);
 }
 
 .card-tags {
@@ -14,17 +14,17 @@
   overflow-y: hidden;
 }
 
-.card-tags>span {
+.card-tags > span {
   padding: 0 var(--base);
   margin: var(--base);
   font-weight: bold;
-  color:var(--main-background-primary-color);
+  color: var(--main-background-primary-color);
   border: var(--card-button-primary-color) var(--base) solid;
   border-radius: var(--base);
   background-color: var(--card-button-primary-color);
 }
 
-.mark-modal{
+.mark-modal {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,41 +32,41 @@
   padding: var(--m);
 }
 
-.mark-modal-content{
+.mark-modal-content {
   padding: var(--m);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.mark-modal-select{
+.mark-modal-select {
   width: 10rem;
   justify-content: center;
   color: var(--on-primary-main-color);
 }
 
-.mark-modal-select>div{
+.mark-modal-select > div {
   background-color: var(--main-background-primary-color);
 }
 
-.mark-modal-select>div{
+.mark-modal-select > div {
   border: none;
 }
 
-.mark-modal-select>div>div>div{
+.mark-modal-select > div > div > div {
   background-color: var(--main-background-primary-color);
 }
 
-.mark-modal-form-div{
+.mark-modal-form-div {
   display: flex;
   flex-direction: column;
 }
 
-.mark-modal-form-div>label{
+.mark-modal-form-div > label {
   color: var(--on-primary-color);
 }
 
-.mark-modal-form-div>input{
+.mark-modal-form-div > input {
   height: 2rem;
   width: 15rem;
   background-color: var(--main-background-primary-color);
@@ -77,7 +77,7 @@
   padding: 0 var(--m);
 }
 
-.mark-modal-form-a{
+.mark-modal-form-a {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -88,12 +88,12 @@
   margin: var(--m);
 }
 
-.mark-modal-form-a>a{
+.mark-modal-form-a > a {
   text-decoration: none;
   color: var(--main-background-primary-color);
 }
 
-.mark-modal-form-a>a:hover{
+.mark-modal-form-a > a:hover {
   filter: brightness(120%);
   transform: translateY(-3px);
 }
@@ -132,7 +132,7 @@
   padding: var(--s);
 }
 
-.form-error>span {
+.form-error > span {
   color: #d93025;
 }
 
@@ -142,10 +142,6 @@
 }
 
 .ReactTags :global {
-  /* Example Styles for React Tags*/
-  /* Styles for the input */
-  /* Styles for selected tags */
-  /* Styles for suggestions */
 }
 .ReactTags :global .app {
   padding: 40px;
@@ -162,7 +158,8 @@
   border-radius: 2px;
   display: inline-block;
 }
-.ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField, .ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField:focus {
+.ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField,
+.ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField:focus {
   height: 31px;
   margin: 0;
   font-size: 12px;

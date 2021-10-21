@@ -1,5 +1,5 @@
-import {CreateMarkDto} from "./create-mark-dto";
-import {Mark} from "../../domain/mark/mark";
+import { CreateMarkDto } from './create-mark-dto'
+import { Mark } from '../../domain/mark/mark'
 
 export class CreateMarkDtoToMarkMapper {
   map(createMarkDto: CreateMarkDto): Mark {
@@ -13,7 +13,7 @@ export class CreateMarkDtoToMarkMapper {
       image: createMarkDto.image,
       markdown: createMarkDto.markdown,
       createdAt: new Date(Date.now()),
-      updatedAt: new Date(Date.now())
+      updatedAt: new Date(Date.now()),
     }
   }
 }

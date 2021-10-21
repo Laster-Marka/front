@@ -2,7 +2,11 @@ import { CardContainer } from './card-container'
 
 export default {
   title: 'CardContainer',
-  component: CardContainer
+  component: CardContainer,
 }
 
-export const base = () => <CardContainer cardContainerName={'New'} showDeleteModal={() => {}} newMark={() => {}}>Click me</CardContainer>
+export const base = () => (
+  <CardContainer cardContainerName={'New'} showDeleteModal={() => {}} newMark={() => {}}>
+    Click me
+  </CardContainer>
+)

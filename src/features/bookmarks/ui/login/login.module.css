@@ -7,13 +7,12 @@
   border-radius: var(--m);
 }
 
-.login-container>form {
+.login-container > form {
   padding: var(--m);
   height: 100%;
-
 }
 
-form .form-inner{
+form .form-inner {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -72,7 +71,7 @@ form .form-inner .form-group input {
   transform: translateY(-3px);
 }
 
-.register-modal{
+.register-modal {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -80,23 +79,23 @@ form .form-inner .form-group input {
   padding: var(--l);
 }
 
-.register-modal-content{
+.register-modal-content {
   padding: var(--m);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.register-modal-form-div{
+.register-modal-form-div {
   display: flex;
   flex-direction: column;
 }
 
-.register-modal-form-div>label{
+.register-modal-form-div > label {
   color: var(--on-primary-color);
 }
 
-.register-modal-form-div>input{
+.register-modal-form-div > input {
   height: 2rem;
   width: 15rem;
   background-color: var(--main-background-primary-color);
@@ -117,7 +116,7 @@ form .form-inner .form-group input {
   padding: var(--s);
 }
 
-.form-error>span {
+.form-error > span {
   color: var(--on-primary-color);
 }
 
@@ -127,7 +126,7 @@ form .form-inner .form-group input {
 }
 
 @media (max-width: 720px) {
-  .register-modal-form-div>input{
+  .register-modal-form-div > input {
     height: 2rem;
     padding: 0 var(--s);
   }

@@ -1,8 +1,8 @@
-import {Button} from './button'
+import { Button } from './button'
 
 export default {
   title: 'Button',
-  component: Button
+  component: Button,
 }
 
 export const primary = () => <Button theme="primary">Click me</Button>

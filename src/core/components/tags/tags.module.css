@@ -1,9 +1,4 @@
-/* Example Styles for React Tags*/
 .ReactTags :global {
-  /* Example Styles for React Tags*/
-  /* Styles for the input */
-  /* Styles for selected tags */
-  /* Styles for suggestions */
 }
 .ReactTags :global .app {
   padding: 40px;
@@ -28,7 +23,8 @@
   border-radius: 2px;
   display: inline-block;
 }
-.ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField, .ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField:focus {
+.ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField,
+.ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField:focus {
   height: 31px;
   margin: 0;
   font-size: 12px;

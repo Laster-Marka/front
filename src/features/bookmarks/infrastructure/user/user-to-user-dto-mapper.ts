@@ -1,5 +1,5 @@
-import {User} from "../../domain/user/user";
-import {UserDto} from "./user-dto";
+import { User } from '../../domain/user/user'
+import { UserDto } from './user-dto'
 
 export class UserToUserDtoMapper {
   map({ id, email, name, password, createdAt, updatedAt }: User): UserDto {
@@ -9,8 +9,7 @@ export class UserToUserDtoMapper {
       name: name,
       password: password,
       createdAt: createdAt,
-      updatedAt: updatedAt
+      updatedAt: updatedAt,
     }
   }
 }
-

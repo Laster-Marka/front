@@ -1,7 +1,7 @@
-import {User} from "./user";
-import {EditPassword} from "./edit-password";
-import {UserLogin} from "./user-login";
-import {UserRegister} from "./user-register";
+import { User } from './user'
+import { EditPassword } from './edit-password'
+import { UserLogin } from './user-login'
+import { UserRegister } from './user-register'
 
 export interface UserRepository {
   signUp(user: UserRegister): Promise<any>

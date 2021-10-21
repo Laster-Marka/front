@@ -1,5 +1,5 @@
-import {FolderDto} from "./folder-dto";
+import { FolderDto } from './folder-dto'
 
 export interface FoldersContent {
-  folders: FolderDto[];
+  folders: FolderDto[]
 }

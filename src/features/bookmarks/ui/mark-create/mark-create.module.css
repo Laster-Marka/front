@@ -1,4 +1,4 @@
-.mark-modal{
+.mark-modal {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,41 +6,41 @@
   padding: var(--m);
 }
 
-.mark-modal-content{
+.mark-modal-content {
   padding: var(--m);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.mark-modal-select{
+.mark-modal-select {
   width: 10rem;
   justify-content: center;
   color: var(--on-primary-main-color);
 }
 
-.mark-modal-select>div{
+.mark-modal-select > div {
   background-color: var(--main-background-primary-color);
 }
 
-.mark-modal-select>div{
+.mark-modal-select > div {
   border: none;
 }
 
-.mark-modal-select>div>div>div{
+.mark-modal-select > div > div > div {
   background-color: var(--main-background-primary-color);
 }
 
-.mark-modal-form-div{
+.mark-modal-form-div {
   display: flex;
   flex-direction: column;
 }
 
-.mark-modal-form-div>label{
+.mark-modal-form-div > label {
   color: var(--on-primary-color);
 }
 
-.mark-modal-form-div>input{
+.mark-modal-form-div > input {
   height: 2rem;
   width: 15rem;
   background-color: var(--main-background-primary-color);
@@ -59,7 +59,7 @@
   padding: var(--s);
 }
 
-.form-error>span {
+.form-error > span {
   color: #d93025;
 }
 
@@ -69,10 +69,6 @@
 }
 
 .ReactTags :global {
-  /* Example Styles for React Tags*/
-  /* Styles for the input */
-  /* Styles for selected tags */
-  /* Styles for suggestions */
 }
 .ReactTags :global .app {
   padding: 40px;
@@ -89,9 +85,10 @@
   border-radius: 2px;
   display: inline-block;
 }
-.ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField, .ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField:focus {
+.ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField,
+.ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField:focus {
   height: 31px;
-  margin: var(--m) 0 ;
+  margin: var(--m) 0;
   font-size: 12px;
   border: 2px solid var(--on-primary-main-color);
   border-radius: var(--s);
@@ -132,4 +129,3 @@
   color: var(--on-primary-main-color);
   font-weight: bold;
 }
-

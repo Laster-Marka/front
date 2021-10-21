@@ -1,22 +1,24 @@
-import {MarkRepository} from "../../domain/mark/mark-repository";
-import {Mark} from "../../domain/mark/mark";
-import {inject} from "tsyringe";
-import {STORAGE} from "../../../../core/types/types";
-import {Folder} from "../../domain/folder/folder";
-import {FoldersContent} from "../folder/folders-content";
-import {CreateMarkDto} from "./create-mark-dto";
-import {CreateMarkDtoToMarkMapper} from "./create-mark-dto-to-mark";
-import {FolderDtoToFolderMapper} from "../folder/folder-dto-to-folder-mapper";
-import {FolderToFolderDtoMapper} from "../folder/folder-to-folder-dto-mapper";
-import {CreateFolderDto} from "../folder/create-folder-dto";
-import {CreateFolderDtoToFolderMapper} from "../folder/create-folder-dto-to-folder";
+import { MarkRepository } from '../../domain/mark/mark-repository'
+import { Mark } from '../../domain/mark/mark'
+import { inject } from 'tsyringe'
+import { STORAGE } from '../../../../core/types/types'
+import { Folder } from '../../domain/folder/folder'
+import { FoldersContent } from '../folder/folders-content'
+import { CreateMarkDto } from './create-mark-dto'
+import { CreateMarkDtoToMarkMapper } from './create-mark-dto-to-mark'
+import { FolderDtoToFolderMapper } from '../folder/folder-dto-to-folder-mapper'
+import { FolderToFolderDtoMapper } from '../folder/folder-to-folder-dto-mapper'
+import { CreateFolderDto } from '../folder/create-folder-dto'
+import { CreateFolderDtoToFolderMapper } from '../folder/create-folder-dto-to-folder'
 
 export class MarkLocalRepository implements MarkRepository {
-  constructor(@inject(STORAGE) private readonly storage: Storage,
-              private readonly folderDtoToFolderMapper: FolderDtoToFolderMapper,
-              private readonly folderToFolderDtoMapper: FolderToFolderDtoMapper,
-              private readonly createFolderDtoToFolderMapper: CreateFolderDtoToFolderMapper,
-              private readonly createMarkDtoToMarkMapper: CreateMarkDtoToMarkMapper) {}
+  constructor(
+    @inject(STORAGE) private readonly storage: Storage,
+    private readonly folderDtoToFolderMapper: FolderDtoToFolderMapper,
+    private readonly folderToFolderDtoMapper: FolderToFolderDtoMapper,
+    private readonly createFolderDtoToFolderMapper: CreateFolderDtoToFolderMapper,
+    private readonly createMarkDtoToMarkMapper: CreateMarkDtoToMarkMapper,
+  ) {}
 
   async findAll(): Promise<Folder[]> {
     const foldersString = this.storage.getItem('folders')
@@ -25,7 +27,9 @@ export class MarkLocalRepository implements MarkRepository {
       return []
     } else {
       let foldersContent: FoldersContent = JSON.parse(foldersString)
-      const folders: Folder[] = foldersContent.folders.map((folder) => {return this.folderDtoToFolderMapper.map(folder)})
+      const folders: Folder[] = foldersContent.folders.map(folder => {
+        return this.folderDtoToFolderMapper.map(folder)
+      })
       return folders
     }
   }
@@ -34,11 +38,15 @@ export class MarkLocalRepository implements MarkRepository {
     const foldersString = this.storage.getItem('folders')
     if (foldersString !== null) {
       let foldersContent: FoldersContent = JSON.parse(foldersString)
-      const folders: Folder[] = foldersContent.folders.map((folder) => {return this.folderDtoToFolderMapper.map(folder)})
+      const folders: Folder[] = foldersContent.folders.map(folder => {
+        return this.folderDtoToFolderMapper.map(folder)
+      })
       const markFolderIndex = folders.findIndex(i => i.id === idFolder)
       const mark: Mark = this.createMarkDtoToMarkMapper.map(createMarkDto)
       folders[markFolderIndex].marks.push(mark)
-      foldersContent.folders = folders.map((folder) => {return this.folderToFolderDtoMapper.map(folder)})
+      foldersContent.folders = folders.map(folder => {
+        return this.folderToFolderDtoMapper.map(folder)
+      })
       this.storage.setItem('folders', JSON.stringify(foldersContent))
       return mark
     }
@@ -49,15 +57,23 @@ export class MarkLocalRepository implements MarkRepository {
     const foldersString = this.storage.getItem('folders')
     if (foldersString !== null) {
       let foldersContent: FoldersContent = JSON.parse(foldersString)
-      const folders: Folder[] = foldersContent.folders.map((folder) => {return this.folderDtoToFolderMapper.map(folder)})
-      folders.map((folder) => {folder.marks.map((markDb) => {if (markDb.id === mark.id) {
-        markDb.title = mark.title
-        markDb.type = mark.type
-        markDb.link = mark.link
-        markDb.description = mark.description
-        markDb.tags = mark.tags
-      }})})
-      foldersContent.folders = folders.map((folder) => {return this.folderToFolderDtoMapper.map(folder)})
+      const folders: Folder[] = foldersContent.folders.map(folder => {
+        return this.folderDtoToFolderMapper.map(folder)
+      })
+      folders.map(folder => {
+        folder.marks.map(markDb => {
+          if (markDb.id === mark.id) {
+            markDb.title = mark.title
+            markDb.type = mark.type
+            markDb.link = mark.link
+            markDb.description = mark.description
+            markDb.tags = mark.tags
+          }
+        })
+      })
+      foldersContent.folders = folders.map(folder => {
+        return this.folderToFolderDtoMapper.map(folder)
+      })
       this.storage.setItem('folders', JSON.stringify(foldersContent))
       return mark
     }
@@ -67,21 +83,23 @@ export class MarkLocalRepository implements MarkRepository {
     const foldersString = this.storage.getItem('folders')
     if (foldersString !== null) {
       let foldersContent: FoldersContent = JSON.parse(foldersString)
-      const folders: Folder[] = foldersContent.folders.map((folder) => {return this.folderDtoToFolderMapper.map(folder)})
+      const folders: Folder[] = foldersContent.folders.map(folder => {
+        return this.folderDtoToFolderMapper.map(folder)
+      })
       const markFolderIndex = folders.findIndex(i => i.id === idFolder)
       const deleteMarkIndex = folders[markFolderIndex].marks.findIndex(i => i.id === mark.id)
       const isMarkIncluded = deleteMarkIndex !== -1
       if (isMarkIncluded) {
-        folders[markFolderIndex].marks.splice(deleteMarkIndex,1)
-        foldersContent.folders = folders.map((folder) => {return this.folderToFolderDtoMapper.map(folder)})
+        folders[markFolderIndex].marks.splice(deleteMarkIndex, 1)
+        foldersContent.folders = folders.map(folder => {
+          return this.folderToFolderDtoMapper.map(folder)
+        })
         this.storage.setItem('folders', JSON.stringify(foldersContent))
         return 1
-      }
-      else{
+      } else {
         return 0
       }
-    }
-    else{
+    } else {
       return 0
     }
   }
@@ -90,10 +108,14 @@ export class MarkLocalRepository implements MarkRepository {
     const foldersString = this.storage.getItem('folders')
     if (foldersString !== null) {
       let foldersContent: FoldersContent = JSON.parse(foldersString)
-      let folders: Folder[] = foldersContent.folders.map((folder) => {return this.folderDtoToFolderMapper.map(folder)})
+      let folders: Folder[] = foldersContent.folders.map(folder => {
+        return this.folderDtoToFolderMapper.map(folder)
+      })
       const folder: Folder = this.createFolderDtoToFolderMapper.map(createFolderDto)
       folders = [...folders, folder]
-      foldersContent.folders = folders.map((folder) => {return this.folderToFolderDtoMapper.map(folder)})
+      foldersContent.folders = folders.map(folder => {
+        return this.folderToFolderDtoMapper.map(folder)
+      })
       this.storage.setItem('folders', JSON.stringify(foldersContent))
       return folder
     }
@@ -102,14 +124,17 @@ export class MarkLocalRepository implements MarkRepository {
   async editFolder(folder: Folder): Promise<any> {
     const foldersString = this.storage.getItem('folders')
     if (foldersString !== null) {
-
       let foldersContent: FoldersContent = JSON.parse(foldersString)
-      const folders: Folder[] = foldersContent.folders.map((folder) => {return this.folderDtoToFolderMapper.map(folder)})
+      const folders: Folder[] = foldersContent.folders.map(folder => {
+        return this.folderDtoToFolderMapper.map(folder)
+      })
       const editFolderIndex = folders.findIndex(i => i.id === folder.id)
       const isFolderIncluded = editFolderIndex !== -1
       if (isFolderIncluded) {
         folders[editFolderIndex].name = folder.name
-        foldersContent.folders = folders.map((folder) => {return this.folderToFolderDtoMapper.map(folder)})
+        foldersContent.folders = folders.map(folder => {
+          return this.folderToFolderDtoMapper.map(folder)
+        })
         this.storage.setItem('folders', JSON.stringify(foldersContent))
       }
     }
@@ -119,20 +144,22 @@ export class MarkLocalRepository implements MarkRepository {
     const foldersString = this.storage.getItem('folders')
     if (foldersString !== null) {
       let foldersContent: FoldersContent = JSON.parse(foldersString)
-      const folders: Folder[] = foldersContent.folders.map((folder) => {return this.folderDtoToFolderMapper.map(folder)})
+      const folders: Folder[] = foldersContent.folders.map(folder => {
+        return this.folderDtoToFolderMapper.map(folder)
+      })
       const folderToDeleteIndex = folders.findIndex(i => i.id === id)
       const isFolderIncluded = folderToDeleteIndex !== -1
       if (isFolderIncluded) {
-        folders.splice(folderToDeleteIndex,1)
-        foldersContent.folders = folders.map((folder) => {return this.folderToFolderDtoMapper.map(folder)})
+        folders.splice(folderToDeleteIndex, 1)
+        foldersContent.folders = folders.map(folder => {
+          return this.folderToFolderDtoMapper.map(folder)
+        })
         this.storage.setItem('folders', JSON.stringify(foldersContent))
         return 1
-      }
-      else{
+      } else {
         return 0
       }
-    }
-    else{
+    } else {
       return 0
     }
   }

@@ -1,10 +1,10 @@
-import {inject} from "tsyringe";
-import {STORAGE} from "../../../../core/types/types";
-import {User} from "../../domain/user/user";
-import {EditPassword} from "../../domain/user/edit-password";
-import {UserRepository} from "../../domain/user/user-repository";
-import {UserLogin} from "../../domain/user/user-login";
-import {UserRegister} from "../../domain/user/user-register";
+import { inject } from 'tsyringe'
+import { STORAGE } from '../../../../core/types/types'
+import { User } from '../../domain/user/user'
+import { EditPassword } from '../../domain/user/edit-password'
+import { UserRepository } from '../../domain/user/user-repository'
+import { UserLogin } from '../../domain/user/user-login'
+import { UserRegister } from '../../domain/user/user-register'
 
 export class UserLocalRepository implements UserRepository {
   constructor(@inject(STORAGE) private readonly storage: Storage) {}
@@ -17,32 +17,32 @@ export class UserLocalRepository implements UserRepository {
       const findNameDuplicateIndex = users.findIndex(i => i.name === user.name)
       const isEmailDuplicated = findEmailDuplicateIndex !== -1
       const isNameDuplicated = findNameDuplicateIndex !== -1
-      if(!isEmailDuplicated){
-        if(!isNameDuplicated) {
+      if (!isEmailDuplicated) {
+        if (!isNameDuplicated) {
           //TODO: userRegisterToUser
           if (user.password === user.confirmPassword) {
             const userDto: User = {
-              id: "1",
+              id: '1',
               email: user.email,
               name: user.name,
               password: user.password,
               createdAt: new Date(),
-              updatedAt: new Date()
+              updatedAt: new Date(),
             }
             users = [...users, userDto]
             this.storage.setItem('users', JSON.stringify(users))
             return userDto
-          } else{
-            return "passwords do not match"
+          } else {
+            return 'passwords do not match'
           }
-        } else{
-          return "name already exist"
+        } else {
+          return 'name already exist'
         }
-      } else{
-        return "email already exist"
+      } else {
+        return 'email already exist'
       }
-    } else{
-      return "db error"
+    } else {
+      return 'db error'
     }
   }
 
@@ -52,26 +52,26 @@ export class UserLocalRepository implements UserRepository {
       let users: User[] = JSON.parse(userString)
       const findUserIndex = users.findIndex(i => i.email === user.email)
       const isUser = findUserIndex !== -1
-      if(isUser){
-        if(user.password === users[findUserIndex].password){
+      if (isUser) {
+        if (user.password === users[findUserIndex].password) {
           this.storage.setItem('active-user', JSON.stringify(user))
           return users[findUserIndex]
-        } else{
-          return "wrong user or password"
+        } else {
+          return 'wrong user or password'
         }
-      } else{
-        return "wrong user or password"
+      } else {
+        return 'wrong user or password'
       }
     }
-    return "db error"
+    return 'db error'
   }
 
   async logOut(): Promise<any> {
     const userString = this.storage.getItem('active-user')
     let resultError: boolean = false
     if (userString !== null) {
-      this.storage.setItem('active-user', JSON.stringify(""))
-    } else{
+      this.storage.setItem('active-user', JSON.stringify(''))
+    } else {
       resultError = true
     }
     return resultError
@@ -83,7 +83,7 @@ export class UserLocalRepository implements UserRepository {
     if (userString !== null) {
       let user: User = JSON.parse(userString)
       return user
-    } else{
+    } else {
       return null
     }
   }
@@ -95,7 +95,7 @@ export class UserLocalRepository implements UserRepository {
       let dbUser: User = JSON.parse(userString)
       dbUser.name = user.name
       this.storage.setItem('active-user', JSON.stringify(dbUser))
-    } else{
+    } else {
       resultError = true
     }
     return resultError
@@ -110,15 +110,19 @@ export class UserLocalRepository implements UserRepository {
       let users: User[] = JSON.parse(usersString)
       const findUserIndex = users.findIndex(i => i.email === dbUser.email)
       const isUser = findUserIndex !== -1
-      if(isUser && editPassword.oldPassword === users[findUserIndex].password && editPassword.newPassword === editPassword.newConfirmPassword){
+      if (
+        isUser &&
+        editPassword.oldPassword === users[findUserIndex].password &&
+        editPassword.newPassword === editPassword.newConfirmPassword
+      ) {
         dbUser.password = editPassword.newPassword
         users[findUserIndex].password = editPassword.newPassword
         this.storage.setItem('active-user', JSON.stringify(dbUser))
         this.storage.setItem('users', JSON.stringify(users))
-      } else{
+      } else {
         resultError = true
       }
-    } else{
+    } else {
       resultError = true
     }
     return resultError
@@ -134,7 +138,7 @@ export class UserLocalRepository implements UserRepository {
       if (isUser) {
         users.splice(userToDeleteIndex, 1)
         this.storage.setItem('users', JSON.stringify(users))
-        this.storage.setItem('active-user', JSON.stringify(""))
+        this.storage.setItem('active-user', JSON.stringify(''))
       } else {
         resultError = true
       }

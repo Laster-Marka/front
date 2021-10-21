@@ -1,5 +1,5 @@
-import {Tag} from "../tag/tag";
-import {Type} from "./type";
+import { Tag } from '../tag/tag'
+import { Type } from './type'
 
 export interface Mark {
   id: string

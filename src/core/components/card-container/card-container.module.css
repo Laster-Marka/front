@@ -12,8 +12,8 @@
   width: 10rem;
   display: grid;
   grid-template-areas:
-        'trash new'
-        'name name';
+    'trash new'
+    'name name';
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
 }
@@ -22,7 +22,7 @@
   padding: var(--m);
   color: darkred;
   margin: 0.75rem;
-  zoom: 110%
+  zoom: 110%;
 }
 
 .trash:hover {
@@ -48,7 +48,7 @@
   padding: var(--m);
   height: 5rem;
   border-radius: 0 2rem 0 2rem;
-  background-color: var(--card-button-primary-color)
+  background-color: var(--card-button-primary-color);
 }
 
 @media (max-width: 720px) {

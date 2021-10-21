@@ -1,4 +1,3 @@
-
 import { bind } from '../../../utils/bind'
 import styles from './button.module.css'
 import { FC, HTMLProps } from 'react'

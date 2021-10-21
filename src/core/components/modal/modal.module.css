@@ -25,7 +25,7 @@
   line-height: 1.8;
   color: #141414;
 }
-/* Close button */
+
 .close {
   cursor: pointer;
   position: absolute;
@@ -45,6 +45,6 @@
 
 @media (max-width: 720px) {
   .modal {
-    width: 31rem;
+    width: 28rem;
   }
 }

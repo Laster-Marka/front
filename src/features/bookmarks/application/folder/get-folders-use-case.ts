@@ -1,4 +1,4 @@
-import {MarkRepository} from "../../domain/mark/mark-repository";
+import { MarkRepository } from '../../domain/mark/mark-repository'
 
 export class GetFoldersUseCase {
   constructor(private readonly markRepository: MarkRepository) {}

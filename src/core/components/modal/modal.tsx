@@ -1,10 +1,10 @@
-import {FC, useCallback, useEffect, useRef, useState} from 'react';
-import {bind} from "../../../utils/bind";
-import styles from "./modal.module.css";
+import { FC, useCallback, useEffect, useRef, useState } from 'react'
+import { bind } from '../../../utils/bind'
+import styles from './modal.module.css'
 
 const cx = bind(styles)
 
-export interface Props{
+export interface Props {
   isOpened: boolean
   onExitModal(): void
 }
@@ -17,7 +17,7 @@ export const Modal: FC<Props> = ({ children, isOpened, onExitModal }) => {
     onExitModal()
   }, [])
 
-  const modalRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null)
 
   const closeModal = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (modalRef.current === e.target) {
@@ -36,17 +36,15 @@ export const Modal: FC<Props> = ({ children, isOpened, onExitModal }) => {
     }
   }, [handleEscape, isOpen])
 
-  return(
-    isOpened ? (
-      <>
-        <div className={cx('background')} onClick={closeModal} ref={modalRef}></div>
-        <div className={cx('modal')}>
-          <span role="button" className={cx('close')} aria-label="close" onClick={close}>
-            x
-          </span>
-          <div className={cx('modal-content')}>{children}</div>
-        </div>
-      </>
-    ) : null
-  )
+  return isOpened ? (
+    <>
+      <div className={cx('background')} onClick={closeModal} ref={modalRef}></div>
+      <div className={cx('modal')}>
+        <span role="button" className={cx('close')} aria-label="close" onClick={close}>
+          x
+        </span>
+        <div className={cx('modal-content')}>{children}</div>
+      </div>
+    </>
+  ) : null
 }

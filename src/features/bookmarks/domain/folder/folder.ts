@@ -1,4 +1,4 @@
-import {Mark} from "../mark/mark";
+import { Mark } from '../mark/mark'
 
 export interface Folder {
   id: string

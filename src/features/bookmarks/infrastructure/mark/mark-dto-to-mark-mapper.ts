@@ -1,17 +1,15 @@
-import {Mark} from "../../domain/mark/mark";
-import {MarkDto} from "./mark-dto";
-import {TagDtoToTagMapper} from "../tag/tag-dto-to-tag-mapper";
-import {Tag} from "../../domain/tag/tag";
+import { Mark } from '../../domain/mark/mark'
+import { MarkDto } from './mark-dto'
+import { TagDtoToTagMapper } from '../tag/tag-dto-to-tag-mapper'
+import { Tag } from '../../domain/tag/tag'
 
 export class MarkDtoToMarkMapper {
-  constructor(
-    private readonly tagDtoToTagMapper: TagDtoToTagMapper
-  ) {}
+  constructor(private readonly tagDtoToTagMapper: TagDtoToTagMapper) {}
   map(markDto: MarkDto): Mark {
     let tags: Tag[] = []
 
-    if(markDto.tags !== undefined && markDto.tags.length !== 0) {
-      tags = markDto.tags.map((tag) => {
+    if (markDto.tags !== undefined && markDto.tags.length !== 0) {
+      tags = markDto.tags.map(tag => {
         return this.tagDtoToTagMapper.map(tag)
       })
     }
@@ -25,7 +23,7 @@ export class MarkDtoToMarkMapper {
       image: markDto.image,
       markdown: markDto.markdown,
       createdAt: new Date(markDto.createdAt),
-      updatedAt: new Date(markDto.updatedAt)
+      updatedAt: new Date(markDto.updatedAt),
     }
   }
 }

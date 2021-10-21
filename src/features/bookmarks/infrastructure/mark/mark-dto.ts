@@ -1,5 +1,5 @@
-import {TypeObj} from "../../domain/mark/type";
-import {TagDto} from "../tag/tag-dto";
+import { TypeObj } from '../../domain/mark/type'
+import { TagDto } from '../tag/tag-dto'
 
 export interface MarkDto {
   _id: string

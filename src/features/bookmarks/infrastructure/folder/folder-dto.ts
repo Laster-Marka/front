@@ -1,4 +1,4 @@
-import {MarkDto} from "../mark/mark-dto";
+import { MarkDto } from '../mark/mark-dto'
 
 export interface FolderDto {
   _id: string

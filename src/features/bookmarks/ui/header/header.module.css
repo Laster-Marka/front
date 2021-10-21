@@ -17,8 +17,8 @@
 .navbar__left {
   align-items: center;
   padding: var(--s) var(--s);
-  width: var( --xl);
-  height: var( --xl);
+  width: var(--xl);
+  height: var(--xl);
 }
 
 .navbar__logo {
@@ -40,6 +40,9 @@
 }
 
 @media (max-width: 720px) {
+  .navbar {
+    padding: var(--m) 0;
+  }
   .title {
     font-size: 2rem;
   }

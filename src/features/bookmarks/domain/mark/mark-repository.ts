@@ -1,7 +1,7 @@
 import { Mark } from './mark'
-import {Folder} from "../folder/folder";
-import {CreateMarkDto} from "../../infrastructure/mark/create-mark-dto";
-import {CreateFolderDto} from "../../infrastructure/folder/create-folder-dto";
+import { Folder } from '../folder/folder'
+import { CreateMarkDto } from '../../infrastructure/mark/create-mark-dto'
+import { CreateFolderDto } from '../../infrastructure/folder/create-folder-dto'
 
 export interface MarkRepository {
   findAll(): Promise<Folder[]>
