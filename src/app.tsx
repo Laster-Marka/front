@@ -8,7 +8,7 @@ import { GetUsersUseCase } from './features/bookmarks/application/user/get-users
 import { User } from './features/bookmarks/domain/user/user'
 
 export const App: FC = () => {
-  const userRepository = UserRepositoryFactory.buildLocal()
+  const userRepository = UserRepositoryFactory.build()
   const [user, setUser] = useState<User | null>()
 
   useEffect(() => {
