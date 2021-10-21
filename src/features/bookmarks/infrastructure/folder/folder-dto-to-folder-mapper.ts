@@ -20,8 +20,8 @@ export class FolderDtoToFolderMapper {
       marks: marks,
       isPublic: folderDto.isPublic,
       color: folderDto.color,
-      createdAt: folderDto.createdAt,
-      updatedAt: folderDto.updatedAt
+      createdAt: new Date(folderDto.createdAt),
+      updatedAt: new Date(folderDto.updatedAt)
     }
   }
 }

@@ -50,8 +50,6 @@ export class MarkLocalRepository implements MarkRepository {
     if (foldersString !== null) {
       let foldersContent: FoldersContent = JSON.parse(foldersString)
       const folders: Folder[] = foldersContent.folders.map((folder) => {return this.folderDtoToFolderMapper.map(folder)})
-      //TODO
-      //const markFolderIndex = folders.findIndex(i => i.id === idFolder)
       folders.map((folder) => {folder.marks.map((markDb) => {if (markDb.id === mark.id) {
         markDb.title = mark.title
         markDb.type = mark.type
@@ -59,17 +57,9 @@ export class MarkLocalRepository implements MarkRepository {
         markDb.description = mark.description
         markDb.tags = mark.tags
       }})})
-      // const editMarkIndex = folders[markFolderIndex].marks.findIndex(i => i.id === mark.id)
-      // const isMarkIncluded = editMarkIndex !== -1
-      // if (isMarkIncluded) {
-      //   folders[markFolderIndex].marks[editMarkIndex].title = mark.title
-      //   folders[markFolderIndex].marks[editMarkIndex].type = mark.type
-      //   folders[markFolderIndex].marks[editMarkIndex].link = mark.link
-      //   folders[markFolderIndex].marks[editMarkIndex].description = mark.description
-      //   folders[markFolderIndex].marks[editMarkIndex].tags = mark.tags
-        foldersContent.folders = folders.map((folder) => {return this.folderToFolderDtoMapper.map(folder)})
-        this.storage.setItem('folders', JSON.stringify(foldersContent))
-      //}
+      foldersContent.folders = folders.map((folder) => {return this.folderToFolderDtoMapper.map(folder)})
+      this.storage.setItem('folders', JSON.stringify(foldersContent))
+      return mark
     }
   }
 

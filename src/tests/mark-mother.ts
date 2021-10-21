@@ -1,14 +1,14 @@
 import { Mark } from '../features/bookmarks/domain/mark/mark'
 
 export class MarkMother {
-  static videoCat(): Mark {
+  static bestPokemon(): Mark {
     return {
       id: "1",
-      title: 'Cute Cat',
-      link: 'https://www.youtube.com/watch?v=cMESRatAG04&t=40s&ab_channel=nigahiga10able',
-      type: 'Video',
-      tags: [{name: 'cat'}, {name: 'cute'}, {name: 'no'}],
-      description: 'The cat says no, lol',
+      title: 'Best pokemon',
+      link: 'https://pokemon.fandom.com/es/wiki/Psyduck',
+      type: 'Text',
+      tags: [{name: 'POKEMON'}, {name: 'BEST'}, {name: 'PSYDUCK'}],
+      description: 'Psyduck says psy',
       image: "",
       markdown: "",
       createdAt: new Date("2019-01-17"),
@@ -21,8 +21,8 @@ export class MarkMother {
       title: 'How to exit Vim',
       link: 'https://stackoverflow.com/questions/11828270/how-do-i-exit-the-vim-editor',
       type: 'Markdown',
-      tags: [{name: 'stackoverflow'}, {name: 'vim'}],
-      description: ':q',
+      tags: [{name: 'STACKOVERFLOW'}, {name: 'VIM'}],
+      description: ':p',
       image: "",
       markdown: "",
       createdAt: new Date("2019-01-18"),
@@ -33,9 +33,9 @@ export class MarkMother {
     return {
       id: "3",
       title: 'Philosophy',
-      link: 'https://es.answers.yahoo.com/question/index;_ylt=AwrC0CZFcVdgAiAABhz_0IlQ;_ylu=Y29sbwNiZjEEcG9zAzEEdnRpZAMEc2VjA3Ny?qid=20070725051041AA6AU53',
+      link: 'https://es.ayuda.yahoo.com/kb/answers',
       type: 'Text',
-      tags: [{name: 'yahoo'}, {name: 'philosophy'}, {name: 'nietzsche'}],
+      tags: [{name: 'YAHOO'}, {name: 'PHILOSOPHY'}, {name: 'NIETZSCHE'}],
       description: 'Yahoo Respuestas saved my life, now I am a superhuman',
       image: "",
       markdown: "",

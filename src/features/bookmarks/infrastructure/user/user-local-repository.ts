@@ -13,12 +13,9 @@ export class UserLocalRepository implements UserRepository {
     const userString = this.storage.getItem('users')
     if (userString !== null) {
       let users: User[] = JSON.parse(userString)
-      console.log("users: " + users)
       const findEmailDuplicateIndex = users.findIndex(i => i.email === user.email)
-      console.log("findEmailDuplicateIndex: " + findEmailDuplicateIndex)
       const findNameDuplicateIndex = users.findIndex(i => i.name === user.name)
       const isEmailDuplicated = findEmailDuplicateIndex !== -1
-      console.log("isEmailDuplicated: " + isEmailDuplicated)
       const isNameDuplicated = findNameDuplicateIndex !== -1
       if(!isEmailDuplicated){
         if(!isNameDuplicated) {
@@ -34,9 +31,12 @@ export class UserLocalRepository implements UserRepository {
             }
             users = [...users, userDto]
             this.storage.setItem('users', JSON.stringify(users))
+            return userDto
           } else{
-            return "name already exist"
+            return "passwords do not match"
           }
+        } else{
+          return "name already exist"
         }
       } else{
         return "email already exist"
@@ -55,11 +55,12 @@ export class UserLocalRepository implements UserRepository {
       if(isUser){
         if(user.password === users[findUserIndex].password){
           this.storage.setItem('active-user', JSON.stringify(user))
+          return users[findUserIndex]
         } else{
-          return "user or password error"
+          return "wrong user or password"
         }
       } else{
-        return "user or password error"
+        return "wrong user or password"
       }
     }
     return "db error"

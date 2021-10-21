@@ -24,8 +24,8 @@ export class MarkDtoToMarkMapper {
       description: markDto.description,
       image: markDto.image,
       markdown: markDto.markdown,
-      createdAt: markDto.createdAt,
-      updatedAt: markDto.updatedAt
+      createdAt: new Date(markDto.createdAt),
+      updatedAt: new Date(markDto.updatedAt)
     }
   }
 }
